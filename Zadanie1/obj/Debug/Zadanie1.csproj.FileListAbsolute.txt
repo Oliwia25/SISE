@@ -1,0 +1,6 @@
+C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\bin\Debug\Zadanie1.exe.config
+C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\bin\Debug\Zadanie1.exe
+C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\bin\Debug\Zadanie1.pdb
+C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\obj\Debug\Zadanie1.csprojAssemblyReference.cache
+C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\obj\Debug\Zadanie1.exe
+C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\obj\Debug\Zadanie1.pdb
