@@ -5,7 +5,8 @@ board = Board()
 
 
 def main():
-    print(board)
+    board.open('BoardExample')
+    board.write('test.txt')
     with keyboard.Listener(
             on_press=on_press,
             on_release=on_release) as listener:
@@ -28,8 +29,6 @@ def on_release(key):
         print("left")
     elif key == keyboard.Key.down:
         print("down")
-
-    return board.refresh()
 
 
 if __name__ == "__main__":
