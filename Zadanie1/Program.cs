@@ -24,12 +24,17 @@ namespace Zadanie1
         static void Main(string[] args)
         {
             List<string> lines = ReadFromFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\ExampleBoard.TXT");
-            for(int i = 0; i < lines.Capacity; i++)
+            List<int> intList = lines.ConvertAll(int.Parse);
+            Vertex initial = new Vertex(intList);
+            
+            for (int i = 0; i < lines.Count; i++)
             {
-                Console.WriteLine(lines);
+                Console.WriteLine(lines[i]);
+                
             }
 
-            WriteToFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\FinishedBoard.TXT",lines);
+            // WriteToFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\FinishedBoard.TXT",lines);
+            Console.ReadLine();
         }
     }
 }
