@@ -13,6 +13,7 @@ namespace Zadanie1
 
         public List<Vertex> children = new List<Vertex>();
         public Vertex parent;
+        public string moveLetter;
         public int[] game;
         public int emptyTile = 0;
 
@@ -28,7 +29,7 @@ namespace Zadanie1
             }
         }
 
-        public void Move(int[] g, int i1, int i2)
+        public void Move(int[] g, int i1, int i2, string letter)
         {
             int[] newBoard = new int[columnsNumber * rowsNumber];
             CopyBoard(newBoard, g);
@@ -38,6 +39,7 @@ namespace Zadanie1
             newBoard[i2] = tmp;
 
             Vertex child = new Vertex(newBoard);
+            child.moveLetter = letter;
             children.Add(child);
             child.parent = this;
         }
@@ -54,7 +56,7 @@ namespace Zadanie1
         {
             if (index - columnsNumber >= 0)
             {
-                Move(g, index - columnsNumber, index);
+                Move(g, index - columnsNumber, index, "U");
             }
         }
 
@@ -62,7 +64,7 @@ namespace Zadanie1
         {
             if (index + columnsNumber < game.Length)
             {
-                Move(g, index + columnsNumber, index);
+                Move(g, index + columnsNumber, index, "D");
             }
         }
 
@@ -70,7 +72,7 @@ namespace Zadanie1
         {
             if (index % columnsNumber > 0)
             {
-                Move(g, index - 1, index);
+                Move(g, index - 1, index, "L");
             }
         }
 
@@ -78,11 +80,11 @@ namespace Zadanie1
         {
             if (index % columnsNumber < columnsNumber - 1)
             {
-                Move(g, index + 1, index);
+                Move(g, index + 1, index, "R");
             }
         }
 
-        public void UseMove()
+        public void MakeChildren()
         {
             for (int i = 0; i < game.Length; i++)
             {
@@ -127,10 +129,10 @@ namespace Zadanie1
             }
         }
 
-        public bool IsBoardRepeated(List<int> b)
+        public bool IsBoardRepeated(int[] b)
         {
             bool repeated = true;
-            for(int i = 0; i < b.Count; i++)
+            for(int i = 0; i < b.Length; i++)
             {
                 if(game[i] != b[i])
                 {

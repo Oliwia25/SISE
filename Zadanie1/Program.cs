@@ -27,9 +27,7 @@ namespace Zadanie1
             string[] stringList = lines.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
             int[] intList = stringList.Select(arg => int.Parse(arg)).ToArray();
 
-            Vertex initVert = new Vertex(intList);
-
-            //Console.Write(intList[0]);
+            Vertex initVert = new Vertex(intList);            
             initVert.PrintBoard();
             
             //Vertex initial = new Vertex(intList);
