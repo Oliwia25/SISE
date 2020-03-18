@@ -9,12 +9,12 @@ namespace Zadanie1
 {
     class Program
     {
-        public static  List<string>  ReadFromFile(string filename)
-        {
-            List<string> allLinesText = File.ReadAllLines(filename).ToList();
+        //public static  List<string>  ReadFromFile(string filename)
+        //{
+        //    List<string> allLinesText = File.ReadAllLines(filename).ToList();
 
-            return allLinesText;
-        }
+        //    return allLinesText;
+        //}
 
         public static void  WriteToFile(string filename, List<string> finishedBoard)
         {
@@ -23,16 +23,23 @@ namespace Zadanie1
 
         static void Main(string[] args)
         {
-            List<string> lines = ReadFromFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\ExampleBoard.TXT");
-            List<int> intList = lines.ConvertAll(int.Parse);
+            string lines = File.ReadAllText("ExampleBoard.TXT");
+            string[] stringList = lines.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
+            List<int> intList = stringList.Select(arg => int.Parse(arg)).ToList();
+            
+            Vertex initVert = new Vertex(intList);
+
+            initVert.PrintBoard();
+
+
             //Vertex initial = new Vertex(intList);
 
-            AStart root = new AStart(intList);
-            for (int i = 0; i < lines.Count; i++)
-            {
-                Console.WriteLine(lines[i]);
+            //AStart root = new AStart(intList);
+            //for (int i = 0; i < lines.Count; i++)
+            //{
+            //    Console.WriteLine(lines[i]);
                 
-            }
+            //}
 
             // WriteToFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\FinishedBoard.TXT",lines);
             Console.ReadLine();

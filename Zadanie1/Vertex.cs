@@ -18,10 +18,12 @@ namespace Zadanie1
 
         public Vertex(List<int> g)
         {
-            for (int i = 0; i < game.Count; i++)
+            for (int i = 0; i < g.Count; i++)
             {
-                game[i] = g[i];
+                game[i] = g[i + 2];
             }
+            this.rowsNumber = g[0];
+            this.columnsNumber = g[1];
         }
 
         public void Move(List<int> g, int i1, int i2)
