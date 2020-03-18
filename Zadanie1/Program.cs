@@ -26,12 +26,11 @@ namespace Zadanie1
             string lines = File.ReadAllText("ExampleBoard.TXT");
             string[] stringList = lines.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
             List<int> intList = stringList.Select(arg => int.Parse(arg)).ToList();
-            
+
             Vertex initVert = new Vertex(intList);
 
             initVert.PrintBoard();
-
-
+            
             //Vertex initial = new Vertex(intList);
 
             //AStart root = new AStart(intList);

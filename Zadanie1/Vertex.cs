@@ -18,12 +18,12 @@ namespace Zadanie1
 
         public Vertex(List<int> g)
         {
-            for (int i = 0; i < g.Count; i++)
-            {
-                game[i] = g[i + 2];
-            }
             this.rowsNumber = g[0];
             this.columnsNumber = g[1];
+            for (int i = 2; i < g.Count; i++)
+            {
+                game.Add(g[i]);
+            }
         }
 
         public void Move(List<int> g, int i1, int i2)
@@ -44,7 +44,8 @@ namespace Zadanie1
         {
             for (int i = 0; i < b.Count; i++)
             {
-                a[i] = b[i]; // Kopiujemy bo każdy ruch to kolejna nowa tablica
+                a.Clear();
+                a.Add(b[i]); // Kopiujemy bo każdy ruch to kolejna nowa tablica
             }
         }
 
