@@ -13,22 +13,22 @@ namespace Zadanie1
 
         public List<Vertex> children = new List<Vertex>();
         public Vertex parent;
-        public List<int> game = new List<int>();
+        public int[] game = new int[16];
         public int emptyTile = 0;
 
-        public Vertex(List<int> g)
+        public Vertex(int[] g)
         {
             this.rowsNumber = g[0];
             this.columnsNumber = g[1];
-            for (int i = 2; i < g.Count; i++)
+            for (int i = 2; i < game.Length; i++)
             {
-                game.Add(g[i]);
+                game[i] = g[i];
             }
         }
 
-        public void Move(List<int> g, int i1, int i2)
+        public void Move(int[] g, int i1, int i2)
         {
-            List<int> newBoard = new List<int>();
+            int[] newBoard = new int[16];
             CopyBoard(newBoard, g);
 
             int tmp = newBoard[i1];
@@ -40,16 +40,16 @@ namespace Zadanie1
             child.parent = this;
         }
 
-        public void CopyBoard(List<int> a, List<int> b)
+        public void CopyBoard(int[] a, int[] b)
         {
-            for (int i = 0; i < b.Count; i++)
+            for (int i = 0; i < b.Length; i++)
             {
-                a.Clear();
-                a.Add(b[i]); // Kopiujemy bo każdy ruch to kolejna nowa tablica
+                //a.Clear();
+                a[i] = b[i];
             }
         }
 
-        public void MoveUp(List<int> g, int index)
+        public void MoveUp(int[] g, int index)
         {
             if (index - columnsNumber >= 0)
             {
@@ -57,15 +57,15 @@ namespace Zadanie1
             }
         }
 
-        public void MoveDown(List<int> g, int index)
+        public void MoveDown(int[] g, int index)
         {
-            if (index + columnsNumber < game.Count)
+            if (index + columnsNumber < game.Length)
             {
                 Move(g, index + columnsNumber, index);
             }
         }
 
-        public void MoveLeft(List<int> g, int index)
+        public void MoveLeft(int[] g, int index)
         {
             if (index % columnsNumber > 0)
             {
@@ -73,7 +73,7 @@ namespace Zadanie1
             }
         }
 
-        public void MoveRight(List<int> g, int index)
+        public void MoveRight(int[] g, int index)
         {
             if (index % columnsNumber < columnsNumber - 1)
             {
@@ -83,7 +83,7 @@ namespace Zadanie1
 
         public void UseMove()
         {
-            for (int i = 0; i < game.Count; i++)
+            for (int i = 0; i < game.Length; i++)
             {
                 if (game[i] == 0)
                 {
@@ -100,7 +100,7 @@ namespace Zadanie1
         {
             bool isBoardGoal = true;
             int tileNumber = game[0];
-            for (int i = 1; i < game.Count; i++)
+            for (int i = 1; i < game.Length; i++)
             {
                 if (tileNumber > game[i])
                 {
