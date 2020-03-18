@@ -25,10 +25,11 @@ namespace Zadanie1
         {
             string lines = File.ReadAllText("ExampleBoard.TXT");
             string[] stringList = lines.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
-            int[] intList = stringList.Select(arg => int.Parse(arg)).ToArray<int>();
+            int[] intList = stringList.Select(arg => int.Parse(arg)).ToArray();
 
             Vertex initVert = new Vertex(intList);
 
+            //Console.Write(intList[0]);
             initVert.PrintBoard();
             
             //Vertex initial = new Vertex(intList);

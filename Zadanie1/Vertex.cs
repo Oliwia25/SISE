@@ -13,22 +13,24 @@ namespace Zadanie1
 
         public List<Vertex> children = new List<Vertex>();
         public Vertex parent;
-        public int[] game = new int[16];
+        public int[] game;
         public int emptyTile = 0;
 
         public Vertex(int[] g)
         {
             this.rowsNumber = g[0];
             this.columnsNumber = g[1];
+            game = new int[this.rowsNumber * this.columnsNumber];
+
             for (int i = 2; i < game.Length; i++)
             {
-                game[i] = g[i];
+                game[i - 2] = g[i];
             }
         }
 
         public void Move(int[] g, int i1, int i2)
         {
-            int[] newBoard = new int[16];
+            int[] newBoard = new int[columnsNumber * rowsNumber];
             CopyBoard(newBoard, g);
 
             int tmp = newBoard[i1];
@@ -44,7 +46,6 @@ namespace Zadanie1
         {
             for (int i = 0; i < b.Length; i++)
             {
-                //a.Clear();
                 a[i] = b[i];
             }
         }
@@ -124,7 +125,6 @@ namespace Zadanie1
                 }
                 Console.WriteLine();
             }
-
         }
 
         public bool IsBoardRepeated(List<int> b)
