@@ -25,8 +25,9 @@ namespace Zadanie1
         {
             List<string> lines = ReadFromFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\ExampleBoard.TXT");
             List<int> intList = lines.ConvertAll(int.Parse);
-            Vertex initial = new Vertex(intList);
-            
+            //Vertex initial = new Vertex(intList);
+
+            AStart root = new AStart(intList);
             for (int i = 0; i < lines.Count; i++)
             {
                 Console.WriteLine(lines[i]);
