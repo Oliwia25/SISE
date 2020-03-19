@@ -32,8 +32,10 @@ namespace Zadanie1
                 {
                     if (currentVert.children[i].GoalCheck())
                     {
+                      
                         solved = true;
                         Track(solution, currentVert.children[i]);
+                        break;
                     }
                     if (!IsInQueue(toSearch, currentVert.children[i]) && !IsInQueue(searched, currentVert.children[i]))
                     {
@@ -67,5 +69,7 @@ namespace Zadanie1
             }
             return false;
         }
+
+
     }
 }

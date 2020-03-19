@@ -9,13 +9,6 @@ namespace Zadanie1
 {
     class Program
     {
-        //public static  List<string>  ReadFromFile(string filename)
-        //{
-        //    List<string> allLinesText = File.ReadAllLines(filename).ToList();
-
-        //    return allLinesText;
-        //}
-
         public static void  WriteToFile(string filename, List<string> finishedBoard)
         {
             File.WriteAllLines(filename,finishedBoard);
@@ -29,14 +22,24 @@ namespace Zadanie1
 
             Vertex initVert = new Vertex(intList);            
             initVert.PrintBoard();
+            List<Vertex> solution = new List<Vertex>();
             
+            BFS bfs = new BFS();
+            solution = bfs.BfsSteps(initVert);
+
+            Console.WriteLine();
+            for (int i = solution.Count - 1; i >= 0; i--)
+            {
+                solution[i].PrintBoard();
+            }
+
             //Vertex initial = new Vertex(intList);
 
             //AStart root = new AStart(intList);
             //for (int i = 0; i < lines.Count; i++)
             //{
             //    Console.WriteLine(lines[i]);
-                
+
             //}
 
             // WriteToFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\FinishedBoard.TXT",lines);

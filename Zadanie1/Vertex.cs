@@ -10,6 +10,7 @@ namespace Zadanie1
     {
         public int columnsNumber;
         public int rowsNumber;
+        public int size;
 
         public List<Vertex> children = new List<Vertex>();
         public Vertex parent;
@@ -21,27 +22,41 @@ namespace Zadanie1
         {
             this.rowsNumber = g[0];
             this.columnsNumber = g[1];
-            game = new int[this.rowsNumber * this.columnsNumber];
+            this.size = rowsNumber * columnsNumber;
+            game = new int[this.size];
 
-            for (int i = 2; i < game.Length; i++)
+            for (int i = 2; i < game.Length + 2; i++)
             {
                 game[i - 2] = g[i];
             }
         }
 
+        public Vertex(int[] g, int col, int row)
+        {
+            this.rowsNumber = row;
+            this.columnsNumber = col;
+            this.size = rowsNumber * columnsNumber;
+            game = new int[this.size];
+
+            for (int i = 0; i < game.Length; i++)
+            {
+                game[i] = g[i];
+            }
+        }
+
         public void Move(int[] g, int i1, int i2, string letter)
         {
-            int[] newBoard = new int[columnsNumber * rowsNumber];
+            int[] newBoard = new int[size];
             CopyBoard(newBoard, g);
 
             int tmp = newBoard[i1];
             newBoard[i1] = newBoard[i2];
             newBoard[i2] = tmp;
 
-            Vertex child = new Vertex(newBoard);
+            Vertex child = new Vertex(newBoard, columnsNumber, rowsNumber);
             child.moveLetter = letter;
-            children.Add(child);
             child.parent = this;
+            children.Add(child);
         }
 
         public void CopyBoard(int[] a, int[] b)
@@ -97,19 +112,20 @@ namespace Zadanie1
             MoveDown(game, emptyTile);
             MoveRight(game, emptyTile);
             MoveLeft(game, emptyTile);
+            
         }
 
         public bool GoalCheck()
         {
             bool isBoardGoal = true;
-            int tileNumber = game[0];
-            for (int i = 1; i < game.Length; i++)
+            int tileValue = game[0];
+            for (int i = 1; i < game.Length - 1; i++)
             {
-                if (tileNumber > game[i])
+                if (tileValue > game[i])
                 {
                     isBoardGoal = false;
                 }
-                tileNumber = game[i];
+                tileValue = game[i];
             }
             return isBoardGoal;
         }
