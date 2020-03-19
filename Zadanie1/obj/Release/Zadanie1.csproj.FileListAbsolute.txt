@@ -1,0 +1,7 @@
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\bin\Release\Zadanie1.exe.config
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\bin\Release\Zadanie1.exe
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\bin\Release\Zadanie1.pdb
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Release\Zadanie1.csprojAssemblyReference.cache
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Release\Zadanie1.csproj.CoreCompileInputs.cache
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Release\Zadanie1.exe
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Release\Zadanie1.pdb

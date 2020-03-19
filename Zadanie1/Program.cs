@@ -23,10 +23,31 @@ namespace Zadanie1
             Vertex initVert = new Vertex(intList);            
             initVert.PrintBoard();
             List<Vertex> solution = new List<Vertex>();
-            
-            BFS bfs = new BFS();
-            solution = bfs.BfsSteps(initVert);
 
+            string option;
+            option = Console.ReadLine();
+
+            switch (option)
+            {
+                case "bfs":                    
+                    BFS bfs = new BFS();
+                    solution = bfs.BfsSteps(initVert);
+                    break;
+                    
+                case "dfs":
+                    DFS dfs = new DFS();
+                    solution = dfs.DfsSteps(initVert);
+                    break;
+
+                default:
+                    Console.WriteLine("Wrong arguments! ");
+                    break;            
+                                      
+            }
+            
+
+            Console.WriteLine();
+            Console.Write("SOLUTION: ");
             Console.WriteLine();
             for (int i = solution.Count - 1; i >= 0; i--)
             {

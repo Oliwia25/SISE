@@ -15,6 +15,7 @@ namespace Zadanie1
         public List<Vertex> children = new List<Vertex>();
         public Vertex parent;
         public string moveLetter;
+        public int depth;
         public int[] game;
         public int emptyTile = 0;
 
@@ -23,6 +24,7 @@ namespace Zadanie1
             this.rowsNumber = g[0];
             this.columnsNumber = g[1];
             this.size = rowsNumber * columnsNumber;
+            this.depth = 0;
             game = new int[this.size];
 
             for (int i = 2; i < game.Length + 2; i++)
@@ -56,7 +58,10 @@ namespace Zadanie1
             Vertex child = new Vertex(newBoard, columnsNumber, rowsNumber);
             child.moveLetter = letter;
             child.parent = this;
+            child.depth = this.depth + 1;
             children.Add(child);
+            Console.WriteLine();
+            child.PrintBoard();
         }
 
         public void CopyBoard(int[] a, int[] b)
