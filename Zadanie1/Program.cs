@@ -39,12 +39,18 @@ namespace Zadanie1
                     solution = dfs.DfsSteps(initVert);
                     break;
 
+                case "astar":
+                    string heurestic;
+                    heurestic = Console.ReadLine();
+                    AStar aStar = new AStar(heurestic);
+                    solution = aStar.AStarSteps(initVert);
+                    break;
+
                 default:
                     Console.WriteLine("Wrong arguments! ");
                     break;            
                                       
-            }
-            
+            }           
 
             Console.WriteLine();
             Console.Write("SOLUTION: ");
@@ -54,16 +60,6 @@ namespace Zadanie1
                 solution[i].PrintBoard();
             }
 
-            //Vertex initial = new Vertex(intList);
-
-            //AStart root = new AStart(intList);
-            //for (int i = 0; i < lines.Count; i++)
-            //{
-            //    Console.WriteLine(lines[i]);
-
-            //}
-
-            // WriteToFile(@"C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\FinishedBoard.TXT",lines);
             Console.ReadLine();
         }
     }

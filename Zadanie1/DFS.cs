@@ -8,8 +8,13 @@ namespace Zadanie1
 {
     class DFS
     {
+        public Helper helper;
         public int maxDepth = 20;
 
+        public DFS()
+        {
+            this.helper = new Helper();
+        }
         public List<Vertex> DfsSteps(Vertex root)
         {
             List<Vertex> solution = new List<Vertex>();
@@ -30,50 +35,16 @@ namespace Zadanie1
                     if (currentVert.children[i].GoalCheck())
                     {
                         solved = true;
-                        Track(solution, currentVert.children[i]);
+                        helper.Track(solution, currentVert.children[i]);
                         break;
                     }
-                    if (currentVert.depth < maxDepth && !IsInStack(toSearch, currentVert.children[i]) && !IsInList(searched, currentVert.children[i]))
+                    if (currentVert.depth < maxDepth && !helper.IsInStack(toSearch, currentVert.children[i]) && !helper.IsInList(searched, currentVert.children[i]))
                     {
                         toSearch.Push(currentVert.children[i]);
                     }
                 }
             }
             return solution;
-        }
-        public void Track(List<Vertex> list, Vertex v)
-        {
-            Vertex currentV = v;
-            list.Add(currentV);
-            while (currentV.parent != null)
-            {
-                currentV = currentV.parent;
-                list.Add(currentV);
-            }
-        }
-
-        public bool IsInList(List<Vertex> list, Vertex v)
-        {
-            for (int i = 0; i < list.Count(); i++)
-            {
-                if (list[i].IsBoardRepeated(v.game))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool IsInStack(Stack<Vertex> stack, Vertex v)
-        {
-            for (int i = 0; i < stack.Count(); i++)
-            {
-                if (stack.ElementAt(i).IsBoardRepeated(v.game))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
     }

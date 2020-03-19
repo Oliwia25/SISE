@@ -15,9 +15,11 @@ namespace Zadanie1
         public List<Vertex> children = new List<Vertex>();
         public Vertex parent;
         public string moveLetter;
-        public int depth;
+        public int depth; // g for A*
         public int[] game;
         public int emptyTile = 0;
+
+        public int h; // misplaced tiles or distance
 
         public Vertex(int[] g)
         {
@@ -43,7 +45,7 @@ namespace Zadanie1
             for (int i = 0; i < game.Length; i++)
             {
                 game[i] = g[i];
-            }
+            }         
         }
 
         public void Move(int[] g, int i1, int i2, string letter)
@@ -60,8 +62,8 @@ namespace Zadanie1
             child.parent = this;
             child.depth = this.depth + 1;
             children.Add(child);
-            Console.WriteLine();
-            child.PrintBoard();
+            //Console.WriteLine();
+            //child.PrintBoard();
         }
 
         public void CopyBoard(int[] a, int[] b)
@@ -161,6 +163,32 @@ namespace Zadanie1
                 }
             }
             return repeated;
+        }
+
+        public int CalculateHammingDistance()
+        {
+            this.h = 0;
+            for (int i = 0; i < game.Length; i++)
+            {
+                if (game[i] != 0 && game[i] != i + 1)
+                {
+                    h++;
+                }
+            }
+            return h;
+        }
+        
+        public int CalculateManhattanDistance()
+        {
+            this.h = 0;
+            for (int i = 0; i < game.Length; i++)
+            {
+                if (game[i] != 0 && game[i] != i + 1)
+                {
+                    h += Math.Abs(game[i] - (i + 1));
+                }
+            }
+            return h;
         }
     }
 }

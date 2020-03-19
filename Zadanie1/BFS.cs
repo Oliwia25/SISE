@@ -8,7 +8,12 @@ namespace Zadanie1
 {
     class BFS
     {
-        public BFS() { }
+        Helper helper;
+
+        public BFS()
+        {
+            this.helper = new Helper();
+        }
 
         public List<Vertex> BfsSteps(Vertex root)
         {
@@ -31,45 +36,18 @@ namespace Zadanie1
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
                     if (currentVert.children[i].GoalCheck())
-                    {
-                      
+                    {                      
                         solved = true;
-                        Track(solution, currentVert.children[i]);
+                        helper.Track(solution, currentVert.children[i]);
                         break;
                     }
-                    if (!IsInQueue(toSearch, currentVert.children[i]) && !IsInQueue(searched, currentVert.children[i]))
+                    if (!helper.IsInQueue(toSearch, currentVert.children[i]) && !helper.IsInQueue(searched, currentVert.children[i]))
                     {
                         toSearch.Enqueue(currentVert.children[i]);
                     }
                 }
             }
             return solution;
-        }
-
-
-        public void Track(List<Vertex> list, Vertex v)
-        {
-            Vertex currentV = v;
-            list.Add(currentV);
-            while (currentV.parent != null)
-            {
-                currentV = currentV.parent;
-                list.Add(currentV);
-            }
-        }
-
-        public bool IsInQueue(Queue<Vertex> q, Vertex v)
-        {
-            for (int i = 0; i < q.Count(); i++)
-            {
-                if (q.ElementAt(i).IsBoardRepeated(v.game))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
+        }        
     }
 }
