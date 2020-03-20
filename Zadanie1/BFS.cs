@@ -27,22 +27,23 @@ namespace Zadanie1
 
             toSearch.Enqueue(root);
 
-            while(toSearch.Count > 0 && !solved)
+            while (toSearch.Count > 0 && !solved)
             {
                 Vertex currentVert = toSearch.ElementAt(0);
                 searched.Enqueue(currentVert);
                 toSearch.Dequeue();
 
+                if (currentVert.GoalCheck())
+                {
+                    solved = true;
+                    helper.Track(solution, currentVert);
+                    break;
+                }
+
                 currentVert.MakeChildren(order);
 
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
-                    if (currentVert.children[i].GoalCheck())
-                    {                      
-                        solved = true;
-                        helper.Track(solution, currentVert.children[i]);
-                        break;
-                    }
                     if (!helper.IsInQueue(toSearch, currentVert.children[i]) && !helper.IsInQueue(searched, currentVert.children[i]))
                     {
                         toSearch.Enqueue(currentVert.children[i]);

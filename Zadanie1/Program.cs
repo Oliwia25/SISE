@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 namespace Zadanie1
 {
     class Program
     {
+        static Stopwatch stopwatch;
+        //static int visited;
+        //static int processed;
+
         public static void  WriteToFile(string filename, List<string> finishedBoard)
         {
             File.WriteAllLines(filename,finishedBoard);
@@ -37,6 +42,7 @@ namespace Zadanie1
                 order = option.ToCharArray();
             }
 
+            stopwatch = Stopwatch.StartNew();
             switch (algorithm)
             {
                 case "BFS":                    
@@ -52,15 +58,18 @@ namespace Zadanie1
                 case "ASTAR":
                     AStar aStar = new AStar(option);
                     solution = aStar.AStarSteps(initVert);
+                    //visited = aStar.visitedA;
+                    //processed = aStar.processedA;
                     break;
 
                 default:
                     Console.WriteLine("Wrong arguments! ");
-                    break;            
-                                      
+                    break;           
             }
+            stopwatch.Stop();
+
             string solutionFile = args[3];
-            //string statisticFile = args[4];
+            string statisticFile = args[4];
             Console.WriteLine();
             Console.Write("SOLUTION: ");
             Console.WriteLine();
@@ -70,22 +79,43 @@ namespace Zadanie1
             }
 
             List<string> toSolutionFile = new List<string>();
+            List<string> toStatsFile = new List<string>();
+
+            string firstLineStats;
+
             if (solution.Count == 0)
             {
                 toSolutionFile.Add("-1");
+
+                firstLineStats = "-1";
             }
             else
             {
-                int firstLine = solution.Count - 1;
-                string secondLine = "";
-                toSolutionFile.Add(firstLine.ToString());
+                int firstLineSolution = solution.Count - 1;
+                string secondLineSolution = "";
+                toSolutionFile.Add(firstLineSolution.ToString());
                 for (int i = solution.Count - 2; i >= 0; i--)
                 {
-                    secondLine += solution[i].moveLetter;
+                    secondLineSolution += solution[i].moveLetter;
                 }
-                toSolutionFile.Add(secondLine);
+                toSolutionFile.Add(secondLineSolution);
+
+                firstLineStats = (solution.Count - 1).ToString();
             }
             WriteToFile(solutionFile, toSolutionFile);
+
+            string secondLineStats = "odwiedzone";
+            string thirdLineStats = "przetworzone";
+            string fourthLineStats = solution[0].depth.ToString();
+            string fifthLineStats = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 3).ToString();
+
+            toStatsFile.Add(firstLineStats);
+            toStatsFile.Add(secondLineStats);
+            toStatsFile.Add(thirdLineStats);
+            toStatsFile.Add(fourthLineStats);
+            toStatsFile.Add(fifthLineStats);
+
+            WriteToFile(statisticFile, toStatsFile);
 
             Console.ReadLine();
         }

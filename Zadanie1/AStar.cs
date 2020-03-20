@@ -9,12 +9,15 @@ namespace Zadanie1
     class AStar
     {
         public string heurestic;
+        public int visitedA;
+        public int processedA;
         Helper helper;
 
         public AStar(string heurestic)
         {
             this.heurestic = heurestic;
             this.helper = new Helper();
+            this.processedA = 0;
         }
 
         public List<Vertex> AStarSteps(Vertex root)
@@ -35,7 +38,7 @@ namespace Zadanie1
 
                 currentVert.MakeChildren();
 
-                int lowestHvalue = (heurestic == "ham") ? currentVert.children[0].CalculateHammingDistance() : currentVert.children[0].CalculateManhattanDistance();
+                int lowestHvalue = (heurestic == "HAM") ? currentVert.children[0].CalculateHammingDistance() : currentVert.children[0].CalculateManhattanDistance();
                 int lowestHindex = 0;
 
                 if (lowestHvalue == 0)
@@ -68,6 +71,11 @@ namespace Zadanie1
                     toSearch.Enqueue(currentVert.children[lowestHindex]);
                 }
             }
+            //this.visitedA = solution.Count;
+            //for(int i = 0; i < solution.Count; i++)
+            //{
+            //    this.processedA += solution[i].children.Count;
+            //}
             return solution;
         }
 
