@@ -9,10 +9,10 @@ namespace Zadanie1
     class DFS
     {
         public Helper helper;
-        string[] order;
+        char[] order;
         public int maxDepth = 20;
 
-        public DFS(string[] order)
+        public DFS(char[] order)
         {
             this.helper = new Helper();
             this.order = order;

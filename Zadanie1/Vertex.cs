@@ -15,7 +15,7 @@ namespace Zadanie1
         public List<Vertex> children = new List<Vertex>();
         public Vertex parent;
         public string moveLetter;
-        public int depth; // g for A*
+        public int depth; 
         public int[] game;
         public int emptyTile = 0;
 
@@ -62,8 +62,6 @@ namespace Zadanie1
             child.parent = this;
             child.depth = this.depth + 1;
             children.Add(child);
-            //Console.WriteLine();
-            //child.PrintBoard();
         }
 
         public void CopyBoard(int[] a, int[] b)
@@ -122,7 +120,7 @@ namespace Zadanie1
             
         }
 
-        public void MakeChildren(string[] order)
+        public void MakeChildren(char[] order)
         {
             for (int i = 0; i < game.Length; i++)
             {
@@ -135,16 +133,16 @@ namespace Zadanie1
             {
                 switch (order[i])
                 {
-                    case "L":
+                    case 'L':
                         MoveLeft(game, emptyTile);
                         break;
-                    case "R":
+                    case 'R':
                         MoveRight(game, emptyTile);
                         break;
-                    case "U":
+                    case 'U':
                         MoveUp(game, emptyTile);
                         break;
-                    case "D":
+                    case 'D':
                         MoveDown(game, emptyTile);
                         break;
                     default:

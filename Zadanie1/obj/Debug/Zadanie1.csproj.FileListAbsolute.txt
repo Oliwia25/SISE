@@ -4,7 +4,6 @@ C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\bin\Debug\Zadanie1.pdb
 C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\obj\Debug\Zadanie1.csprojAssemblyReference.cache
 C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\obj\Debug\Zadanie1.exe
 C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie1\obj\Debug\Zadanie1.pdb
-E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Debug\Zadanie1.csprojAssemblyReference.cache
 E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Debug\Zadanie1.csproj.CoreCompileInputs.cache
 E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Debug\Zadanie1.exe
 E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie1\obj\Debug\Zadanie1.pdb

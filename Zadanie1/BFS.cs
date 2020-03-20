@@ -9,9 +9,9 @@ namespace Zadanie1
     class BFS
     {
         Helper helper;
-        string[] order;
+        char[] order;
 
-        public BFS(string[] order)
+        public BFS(char[] order)
         {
             this.helper = new Helper();
             this.order = order;

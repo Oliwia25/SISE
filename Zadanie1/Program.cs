@@ -27,34 +27,29 @@ namespace Zadanie1
 
             string algorithm = args[0];
             string option = args[1];
-            option.ToUpper();
-           // algorithm = Console.ReadLine(); //to niepotrzebne chyba wtedy
-            
-           
+            algorithm = algorithm.ToUpper();
+            option = option.ToUpper();
 
-            string[] order = new string[4];
+            char[] order = new char[4];
 
-            if (algorithm != "astar")
+            if (algorithm != "ASTAR")
             {
-                order = option.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
+                order = option.ToCharArray();
             }
 
             switch (algorithm)
             {
-                case "bfs":                    
+                case "BFS":                    
                     BFS bfs = new BFS(order);
                     solution = bfs.BfsSteps(initVert);
                     break;
                     
-                case "dfs":
+                case "DFS":
                     DFS dfs = new DFS(order);
                     solution = dfs.DfsSteps(initVert);
                     break;
 
-                case "astar":
-                    //string heurestic;
-                    //heurestic = Console.ReadLine(); //wywalić potem
-                    //heurestic = args[1];
+                case "ASTAR":
                     AStar aStar = new AStar(option);
                     solution = aStar.AStarSteps(initVert);
                     break;
@@ -65,7 +60,7 @@ namespace Zadanie1
                                       
             }
             string solutionFile = args[3];
-            string statisticFile = args[4];
+            //string statisticFile = args[4];
             Console.WriteLine();
             Console.Write("SOLUTION: ");
             Console.WriteLine();
