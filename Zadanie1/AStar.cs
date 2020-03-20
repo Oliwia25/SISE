@@ -49,7 +49,7 @@ namespace Zadanie1
 
                 for (int i = 1; i < currentVert.children.Count; i++)
                 {
-                    otherH = (heurestic == "ham") ? currentVert.children[i].CalculateHammingDistance() : currentVert.children[i].CalculateManhattanDistance();
+                    otherH = (heurestic == "HAM") ? currentVert.children[i].CalculateHammingDistance() : currentVert.children[i].CalculateManhattanDistance();
                     if (otherH == 0)
                     {
                         solved = true;

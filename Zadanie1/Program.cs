@@ -16,8 +16,7 @@ namespace Zadanie1
 
         static void Main(string[] args)
         {
-            string inputFile;
-            inputFile = args[2];
+            string inputFile = args[2];
             string lines = File.ReadAllText(inputFile);
             string[] stringList = lines.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
             int[] intList = stringList.Select(arg => int.Parse(arg)).ToArray();
@@ -26,33 +25,38 @@ namespace Zadanie1
             initVert.PrintBoard();
             List<Vertex> solution = new List<Vertex>();
 
-            string option = args[0]; 
-            option = Console.ReadLine(); //to niepotrzebne chyba wtedy
-            string searchOrded;
-
+            string algorithm = args[0];
+            string option = args[1];
+            option.ToUpper();
+           // algorithm = Console.ReadLine(); //to niepotrzebne chyba wtedy
             
             string solutionFile =  args[3];
             string statisticFile = args[4];
 
-            switch (option)
+            string[] order = new string[4];
+
+            if (algorithm != "astar")
+            {
+                order = option.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            switch (algorithm)
             {
                 case "bfs":                    
-                    BFS bfs = new BFS();
+                    BFS bfs = new BFS(order);
                     solution = bfs.BfsSteps(initVert);
-                    searchOrded = args[1];
                     break;
                     
                 case "dfs":
-                    DFS dfs = new DFS();
+                    DFS dfs = new DFS(order);
                     solution = dfs.DfsSteps(initVert);
-                    searchOrded = args[1];
                     break;
 
                 case "astar":
-                    string heurestic;
-                    heurestic = Console.ReadLine(); //wywalić potem
-                    heurestic = args[1];
-                    AStar aStar = new AStar(heurestic);
+                    //string heurestic;
+                    //heurestic = Console.ReadLine(); //wywalić potem
+                    //heurestic = args[1];
+                    AStar aStar = new AStar(option);
                     solution = aStar.AStarSteps(initVert);
                     break;
 
@@ -69,6 +73,24 @@ namespace Zadanie1
             {
                 solution[i].PrintBoard();
             }
+
+            List<string> toSolutionFile = new List<string>();
+            if (solution.Count == 0)
+            {
+                toSolutionFile.Add("-1");
+            }
+            else
+            {
+                int firstLine = solution.Count - 1;
+                string secondLine = "";
+                toSolutionFile.Add(firstLine.ToString());
+                for (int i = solution.Count - 2; i >= 0; i--)
+                {
+                    secondLine += solution[i].moveLetter;
+                }
+                toSolutionFile.Add(secondLine);
+            }
+            WriteToFile("Solution.TXT", toSolutionFile);
 
             Console.ReadLine();
         }

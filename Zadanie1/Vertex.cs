@@ -122,6 +122,38 @@ namespace Zadanie1
             
         }
 
+        public void MakeChildren(string[] order)
+        {
+            for (int i = 0; i < game.Length; i++)
+            {
+                if (game[i] == 0)
+                {
+                    emptyTile = i;
+                }
+            }
+            for (int i = 0; i < order.Length; i++)
+            {
+                switch (order[i])
+                {
+                    case "L":
+                        MoveLeft(game, emptyTile);
+                        break;
+                    case "R":
+                        MoveRight(game, emptyTile);
+                        break;
+                    case "U":
+                        MoveUp(game, emptyTile);
+                        break;
+                    case "D":
+                        MoveDown(game, emptyTile);
+                        break;
+                    default:
+                        Console.WriteLine("Wrong order!");
+                        break;
+                }
+            }
+        }
+
         public bool GoalCheck()
         {
             bool isBoardGoal = true;

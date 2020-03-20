@@ -9,11 +9,13 @@ namespace Zadanie1
     class DFS
     {
         public Helper helper;
+        string[] order;
         public int maxDepth = 20;
 
-        public DFS()
+        public DFS(string[] order)
         {
             this.helper = new Helper();
+            this.order = order;
         }
         public List<Vertex> DfsSteps(Vertex root)
         {
@@ -28,7 +30,8 @@ namespace Zadanie1
             {
                 Vertex currentVert = toSearch.Pop();
                 searched.Add(currentVert);
-                currentVert.MakeChildren();
+
+                currentVert.MakeChildren(order);
 
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {

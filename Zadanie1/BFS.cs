@@ -9,10 +9,12 @@ namespace Zadanie1
     class BFS
     {
         Helper helper;
+        string[] order;
 
-        public BFS()
+        public BFS(string[] order)
         {
             this.helper = new Helper();
+            this.order = order;
         }
 
         public List<Vertex> BfsSteps(Vertex root)
@@ -31,7 +33,7 @@ namespace Zadanie1
                 searched.Enqueue(currentVert);
                 toSearch.Dequeue();
 
-                currentVert.MakeChildren();
+                currentVert.MakeChildren(order);
 
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
