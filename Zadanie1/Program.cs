@@ -30,8 +30,7 @@ namespace Zadanie1
             option.ToUpper();
            // algorithm = Console.ReadLine(); //to niepotrzebne chyba wtedy
             
-            string solutionFile =  args[3];
-            string statisticFile = args[4];
+           
 
             string[] order = new string[4];
 
@@ -64,8 +63,9 @@ namespace Zadanie1
                     Console.WriteLine("Wrong arguments! ");
                     break;            
                                       
-            }           
-
+            }
+            string solutionFile = args[3];
+            string statisticFile = args[4];
             Console.WriteLine();
             Console.Write("SOLUTION: ");
             Console.WriteLine();
@@ -90,7 +90,7 @@ namespace Zadanie1
                 }
                 toSolutionFile.Add(secondLine);
             }
-            WriteToFile("Solution.TXT", toSolutionFile);
+            WriteToFile(solutionFile, toSolutionFile);
 
             Console.ReadLine();
         }
