@@ -207,7 +207,7 @@ namespace Zadanie1
             }
             return h;
         }
-        
+
         public int CalculateManhattanDistance()
         {
             this.h = 0;
@@ -215,7 +215,13 @@ namespace Zadanie1
             {
                 if (game[i] != 0 && game[i] != i + 1)
                 {
-                    h += Math.Abs(game[i] - (i + 1));
+                    int CorrectX = (game[i] - 1) % columnsNumber;
+                    int CorrectY = (game[i] - 1) / rowsNumber;
+
+                    int IncorrectX = i % columnsNumber;
+                    int IncorrectY = i / rowsNumber;
+
+                    this.h += Math.Abs(CorrectX - IncorrectX) + Math.Abs(CorrectY - IncorrectY);
                 }
             }
             return h;

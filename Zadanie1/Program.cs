@@ -11,8 +11,8 @@ namespace Zadanie1
     class Program
     {
         static Stopwatch stopwatch;
-        //static int visited;
-        //static int processed;
+        public static int visited;
+        public static int processed;
 
         public static void  WriteToFile(string filename, List<string> finishedBoard)
         {
@@ -58,8 +58,6 @@ namespace Zadanie1
                 case "ASTAR":
                     AStar aStar = new AStar(option);
                     solution = aStar.AStarSteps(initVert);
-                    //visited = aStar.visitedA;
-                    //processed = aStar.processedA;
                     break;
 
                 default:

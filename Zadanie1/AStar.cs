@@ -9,15 +9,12 @@ namespace Zadanie1
     class AStar
     {
         public string heurestic;
-        public int visitedA;
-        public int processedA;
         Helper helper;
 
         public AStar(string heurestic)
         {
             this.heurestic = heurestic;
             this.helper = new Helper();
-            this.processedA = 0;
         }
 
         public List<Vertex> AStarSteps(Vertex root)
@@ -25,6 +22,7 @@ namespace Zadanie1
             Queue<Vertex> toSearch = new Queue<Vertex>();
             List<Vertex> searched = new List<Vertex>();
             List<Vertex> solution = new List<Vertex>();
+            List<int> indexesToSkip = new List<int>();
 
             bool solved = false;
 
@@ -32,6 +30,8 @@ namespace Zadanie1
 
             while (toSearch.Count > 0 && !solved)
             {
+                indexesToSkip.Clear();
+
                 Vertex currentVert = toSearch.ElementAt(0);
                 searched.Add(currentVert);
                 toSearch.Dequeue();
@@ -50,7 +50,7 @@ namespace Zadanie1
 
                 int otherH;
 
-                for (int i = 1; i < currentVert.children.Count; i++)
+                for (int i = lowestHindex + 1; i < currentVert.children.Count; i++)
                 {
                     otherH = (heurestic == "HAM") ? currentVert.children[i].CalculateHammingDistance() : currentVert.children[i].CalculateManhattanDistance();
                     if (otherH == 0)
@@ -64,20 +64,57 @@ namespace Zadanie1
                         lowestHvalue = otherH;
                         lowestHindex = i;
                     }
-                }
+                    else
+                    {
+                        indexesToSkip.Add(lowestHindex);
+                        while (helper.IsInQueue(toSearch, currentVert.children[lowestHindex]) && helper.IsInList(searched, currentVert.children[lowestHindex]))
+                        {
+                            lowestHindex = FindAnotherH(currentVert.children, indexesToSkip);
+                        }
+                        toSearch.Enqueue(currentVert.children[lowestHindex]);
+                    }
 
-                if (!helper.IsInQueue(toSearch, currentVert.children[lowestHindex]) && !helper.IsInList(searched, currentVert.children[lowestHindex]))
-                {
-                    toSearch.Enqueue(currentVert.children[lowestHindex]);
                 }
             }
-            //this.visitedA = solution.Count;
-            //for(int i = 0; i < solution.Count; i++)
-            //{
-            //    this.processedA += solution[i].children.Count;
-            //}
+            Program.visited = searched.Count;
+            Program.processed = ;
             return solution;
         }
 
+        public int FindAnotherH(List<Vertex> children, List<int> indexToSkip)
+        {
+            int lowestHvalue = 0;
+            int lowestHindex = 0;
+
+            for (int i = 0; i < children.Count; i++)
+            {
+                if (!indexToSkip.Contains(i))
+                {
+                    lowestHvalue = children[i].h;
+                    lowestHindex = i;
+                }
+                else
+                {
+                    Console.WriteLine("A* unsuccesful");
+                    break;
+                }
+            }
+            int otherH;
+            for (int i = lowestHindex + 1; i < children.Count; i++)
+            {
+                if (!indexToSkip.Contains(i))
+                {
+                    otherH = children[i].h;
+                    if (otherH < lowestHvalue)
+                    {
+                        lowestHvalue = otherH;
+                        lowestHindex = i;
+                    }
+                }
+            }
+            return lowestHindex;
+        }
+
     }
+
 }

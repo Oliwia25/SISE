@@ -50,6 +50,9 @@ namespace Zadanie1
                     }
                 }
             }
+
+            Program.visited = searched.Count;
+            Program.processed = searched.Count + toSearch.Count;
             return solution;
         }        
     }
