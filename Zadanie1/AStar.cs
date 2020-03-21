@@ -41,7 +41,7 @@ namespace Zadanie1
 
                 int lowestHvalue = (heurestic == "HAM") ? currentVert.children[0].CalculateHammingDistance() : currentVert.children[0].CalculateManhattanDistance();
                 int lowestHindex = 0;
-                if (!helper.IsInList(searched, currentVert.children[i]))
+                if (!helper.IsInList(searched, currentVert.children[0]))
                 {
                     searched.Add(currentVert.children[lowestHindex]);
                 }
@@ -66,9 +66,9 @@ namespace Zadanie1
 
                     if (otherH == 0)
                     {
-                        visited.Add(currentVert.children[lowestHindex]);
+                        visited.Add(currentVert.children[i]);
                         solved = true;
-                        helper.Track(solution, currentVert.children[0]);
+                        helper.Track(solution, currentVert.children[i]);
                         break;
                     }
                     else if (otherH < lowestHvalue)
