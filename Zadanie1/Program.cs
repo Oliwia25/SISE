@@ -33,11 +33,12 @@ namespace Zadanie1
             string algorithm = args[0];
             string option = args[1];
             algorithm = algorithm.ToUpper();
+            Console.WriteLine(algorithm);
             option = option.ToUpper();
 
             char[] order = new char[4];
 
-            if (algorithm != "ASTAR")
+            if (algorithm != "ASTR")
             {
                 order = option.ToCharArray();
             }
@@ -55,7 +56,7 @@ namespace Zadanie1
                     solution = dfs.DfsSteps(initVert);
                     break;
 
-                case "ASTAR":
+                case "ASTR":
                     AStar aStar = new AStar(option);
                     solution = aStar.AStarSteps(initVert);
                     break;

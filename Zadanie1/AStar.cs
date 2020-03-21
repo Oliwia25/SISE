@@ -22,7 +22,7 @@ namespace Zadanie1
             Queue<Vertex> toSearch = new Queue<Vertex>();
             List<Vertex> searched = new List<Vertex>();
             List<Vertex> solution = new List<Vertex>();
-            List<int> indexesToSkip = new List<int>();
+            //List<int> indexesToSkip = new List<int>();
             List<Vertex> visited = new List<Vertex>();
 
             bool solved = false;
@@ -32,14 +32,14 @@ namespace Zadanie1
 
             while (toSearch.Count > 0 && !solved)
             {
-                indexesToSkip.Clear();
+                //indexesToSkip.Clear();
                 Vertex currentVert = toSearch.ElementAt(0);
                 visited.Add(currentVert);
                 toSearch.Dequeue();
 
                 currentVert.MakeChildren();
 
-                int lowestHvalue = (heurestic == "HAM") ? currentVert.children[0].CalculateHammingDistance() : currentVert.children[0].CalculateManhattanDistance();
+                int lowestHvalue = (heurestic == "HAMM") ? currentVert.children[0].CalculateHammingDistance() : currentVert.children[0].CalculateManhattanDistance();
                 int lowestHindex = 0;
                 if (!helper.IsInList(searched, currentVert.children[0]))
                 {
@@ -58,7 +58,7 @@ namespace Zadanie1
 
                 for (int i = lowestHindex + 1; i < currentVert.children.Count; i++)
                 {
-                    otherH = (heurestic == "HAM") ? currentVert.children[i].CalculateHammingDistance() : currentVert.children[i].CalculateManhattanDistance();
+                    otherH = (heurestic == "HAMM") ? currentVert.children[i].CalculateHammingDistance() : currentVert.children[i].CalculateManhattanDistance();
                     if (!helper.IsInList(searched, currentVert.children[i]))
                     {
                         searched.Add(currentVert.children[lowestHindex]);
@@ -76,9 +76,19 @@ namespace Zadanie1
                         lowestHvalue = otherH;
                         lowestHindex = i;
                     }
-                    else
-                    {
-                        indexesToSkip.Add(lowestHindex);
+                }
+                if (!helper.IsInList(visited, currentVert.children[lowestHindex]))
+                {
+                    toSearch.Enqueue(currentVert.children[lowestHindex]);
+                }
+                else
+                {
+                    visited.Add(currentVert.children[lowestHindex]);
+                    currentVert.children.RemoveAt(lowestHindex);
+                }
+                {
+                        //indexesToSkip.Add(lowestHindex);
+                        //currentVert.children.RemoveAt(lowestHindex);
                         while (helper.IsInList(visited, currentVert.children[lowestHindex]))
                         {
                             lowestHindex = FindAnotherH(currentVert.children, indexesToSkip);
@@ -86,7 +96,7 @@ namespace Zadanie1
                         toSearch.Enqueue(currentVert.children[lowestHindex]);
                     }
 
-                }
+                
             }
 
             Program.visited = visited.Count;
@@ -95,37 +105,23 @@ namespace Zadanie1
             return solution;
         }
 
-        public int FindAnotherH(List<Vertex> children, List<int> indexToSkip)
+        public int FindAnotherH(List<Vertex> children)
         {
-            int lowestHvalue = 0;
+            int lowestHvalue = children[0].h;
             int lowestHindex = 0;
 
-            for (int i = 0; i < children.Count; i++)
+            int otherH;
+
+            for (int i = 1; i < children.Count; i++)
             {
-                if (!indexToSkip.Contains(i))
+                otherH = children[i].h;
+                if (otherH < lowestHvalue)
                 {
-                    lowestHvalue = children[i].h;
+                    lowestHvalue = otherH;
                     lowestHindex = i;
                 }
-                else
-                {
-                    Console.WriteLine("A* unsuccesful");
-                    break;
-                }
-            }
-            int otherH;
-            for (int i = lowestHindex + 1; i < children.Count; i++)
-            {
-                if (!indexToSkip.Contains(i))
-                {
-                    otherH = children[i].h;
-                    if (otherH < lowestHvalue)
-                    {
-                        lowestHvalue = otherH;
-                        lowestHindex = i;
-                    }
-                }
-            }
+            }         
+            
             return lowestHindex;
         }
 
