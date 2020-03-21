@@ -85,16 +85,9 @@ namespace Zadanie1
                 {
                     visited.Add(currentVert.children[lowestHindex]);
                     currentVert.children.RemoveAt(lowestHindex);
+                    lowestHindex = FindAnotherH(currentVert.children);
+                    toSearch.Enqueue(currentVert.children[lowestHindex]);
                 }
-                {
-                        //indexesToSkip.Add(lowestHindex);
-                        //currentVert.children.RemoveAt(lowestHindex);
-                        while (helper.IsInList(visited, currentVert.children[lowestHindex]))
-                        {
-                            lowestHindex = FindAnotherH(currentVert.children, indexesToSkip);
-                        }
-                        toSearch.Enqueue(currentVert.children[lowestHindex]);
-                    }
 
                 
             }

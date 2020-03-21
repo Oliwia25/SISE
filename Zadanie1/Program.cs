@@ -26,14 +26,15 @@ namespace Zadanie1
             string[] stringList = lines.Split((string[])null, StringSplitOptions.RemoveEmptyEntries);
             int[] intList = stringList.Select(arg => int.Parse(arg)).ToArray();
 
-            Vertex initVert = new Vertex(intList);            
+            Vertex initVert = new Vertex(intList);
+            Console.WriteLine();
+            Console.WriteLine(inputFile);
             initVert.PrintBoard();
             List<Vertex> solution = new List<Vertex>();
 
             string algorithm = args[0];
             string option = args[1];
             algorithm = algorithm.ToUpper();
-            Console.WriteLine(algorithm);
             option = option.ToUpper();
 
             char[] order = new char[4];
