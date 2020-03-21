@@ -20,7 +20,7 @@ namespace Zadanie1
         public List<Vertex> DfsSteps(Vertex root)
         {
             List<Vertex> solution = new List<Vertex>();
-            List<Vertex> searched = new List<Vertex>();  
+            List<Vertex> searched = new List<Vertex>();
             Stack<Vertex> toSearch = new Stack<Vertex>();
 
             bool solved = false;
@@ -31,16 +31,19 @@ namespace Zadanie1
                 Vertex currentVert = toSearch.Pop();
                 searched.Add(currentVert);
 
+                if (currentVert.GoalCheck())
+                {
+                    solved = true;
+                    helper.Track(solution, currentVert);
+                    break;
+                }
+
                 currentVert.MakeChildren(order);
+                currentVert.children.Reverse();
 
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
-                    if (currentVert.children[i].GoalCheck())
-                    {
-                        solved = true;
-                        helper.Track(solution, currentVert.children[i]);
-                        break;
-                    }
+
                     if (currentVert.depth < maxDepth && !helper.IsInStack(toSearch, currentVert.children[i]) && !helper.IsInList(searched, currentVert.children[i]))
                     {
                         toSearch.Push(currentVert.children[i]);
