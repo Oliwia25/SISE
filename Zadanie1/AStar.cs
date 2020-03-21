@@ -23,26 +23,32 @@ namespace Zadanie1
             List<Vertex> searched = new List<Vertex>();
             List<Vertex> solution = new List<Vertex>();
             List<int> indexesToSkip = new List<int>();
+            List<Vertex> visited = new List<Vertex>();
 
             bool solved = false;
 
             toSearch.Enqueue(root);
+            searched.Add(root);
 
             while (toSearch.Count > 0 && !solved)
             {
                 indexesToSkip.Clear();
-
                 Vertex currentVert = toSearch.ElementAt(0);
-                searched.Add(currentVert);
+                visited.Add(currentVert);
                 toSearch.Dequeue();
 
                 currentVert.MakeChildren();
 
                 int lowestHvalue = (heurestic == "HAM") ? currentVert.children[0].CalculateHammingDistance() : currentVert.children[0].CalculateManhattanDistance();
                 int lowestHindex = 0;
+                if (!helper.IsInList(searched, currentVert.children[i]))
+                {
+                    searched.Add(currentVert.children[lowestHindex]);
+                }
 
                 if (lowestHvalue == 0)
                 {
+                    visited.Add(currentVert.children[lowestHindex]);
                     solved = true;
                     helper.Track(solution, currentVert.children[0]);
                     break;
@@ -53,10 +59,16 @@ namespace Zadanie1
                 for (int i = lowestHindex + 1; i < currentVert.children.Count; i++)
                 {
                     otherH = (heurestic == "HAM") ? currentVert.children[i].CalculateHammingDistance() : currentVert.children[i].CalculateManhattanDistance();
+                    if (!helper.IsInList(searched, currentVert.children[i]))
+                    {
+                        searched.Add(currentVert.children[lowestHindex]);
+                    }
+
                     if (otherH == 0)
                     {
+                        visited.Add(currentVert.children[lowestHindex]);
                         solved = true;
-                        helper.Track(solution, currentVert.children[i]);
+                        helper.Track(solution, currentVert.children[0]);
                         break;
                     }
                     else if (otherH < lowestHvalue)
@@ -67,7 +79,7 @@ namespace Zadanie1
                     else
                     {
                         indexesToSkip.Add(lowestHindex);
-                        while (helper.IsInQueue(toSearch, currentVert.children[lowestHindex]) && helper.IsInList(searched, currentVert.children[lowestHindex]))
+                        while (helper.IsInList(visited, currentVert.children[lowestHindex]))
                         {
                             lowestHindex = FindAnotherH(currentVert.children, indexesToSkip);
                         }
@@ -76,8 +88,10 @@ namespace Zadanie1
 
                 }
             }
-            Program.visited = searched.Count;
-            Program.processed = ;
+
+            Program.visited = visited.Count;
+            Program.processed = searched.Count;
+
             return solution;
         }
 
@@ -116,5 +130,6 @@ namespace Zadanie1
         }
 
     }
+
 
 }

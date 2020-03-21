@@ -102,8 +102,8 @@ namespace Zadanie1
             }
             WriteToFile(solutionFile, toSolutionFile);
 
-            string secondLineStats = "odwiedzone";
-            string thirdLineStats = "przetworzone";
+            string secondLineStats = visited.ToString();
+            string thirdLineStats = processed.ToString();
             string fourthLineStats = solution[0].depth.ToString();
             string fifthLineStats = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 3).ToString();
 
