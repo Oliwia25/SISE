@@ -13,6 +13,7 @@ namespace Zadanie1
         static Stopwatch stopwatch;
         public static int visited;
         public static int processed;
+        public static int deepest;
 
         public static void  WriteToFile(string filename, List<string> finishedBoard)
         {
@@ -106,7 +107,7 @@ namespace Zadanie1
 
             string secondLineStats = visited.ToString();
             string thirdLineStats = processed.ToString();
-            string fourthLineStats = solution[0].depth.ToString();
+            string fourthLineStats = deepest.ToString();
             string fifthLineStats = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 3).ToString();
 
             toStatsFile.Add(firstLineStats);
@@ -117,7 +118,7 @@ namespace Zadanie1
 
             WriteToFile(statisticFile, toStatsFile);
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }

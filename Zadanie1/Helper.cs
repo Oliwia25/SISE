@@ -33,6 +33,18 @@ namespace Zadanie1
             return false;
         }
 
+        public bool IsInLinkedList(LinkedList<Vertex> list, Vertex v)
+        {
+            for (int i = 0; i < list.Count(); i++)
+            {
+                if (list.ElementAt(0).IsBoardRepeated(v.game) && list.ElementAt(i).depth >= v.depth)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public bool IsInStack(Stack<Vertex> stack, Vertex v)
         {
             for (int i = 0; i < stack.Count(); i++)

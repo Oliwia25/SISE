@@ -53,6 +53,7 @@ namespace Zadanie1
 
             Program.visited = searched.Count;
             Program.processed = searched.Count + toSearch.Count;
+            Program.deepest = solution[0].depth;
             return solution;
         }        
     }

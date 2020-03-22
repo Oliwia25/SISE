@@ -10,7 +10,7 @@ namespace Zadanie1
     {
         public Helper helper;
         char[] order;
-        public int maxDepth = 20;
+        public int maxDepth = 21;
 
         public DFS(char[] order)
         {
@@ -21,15 +21,21 @@ namespace Zadanie1
         {
             List<Vertex> solution = new List<Vertex>();
             List<Vertex> searched = new List<Vertex>();
-            Stack<Vertex> toSearch = new Stack<Vertex>();
+            LinkedList<Vertex> toSearch = new LinkedList<Vertex>();
 
             bool solved = false;
-            toSearch.Push(root);
+            toSearch.AddFirst(root);
 
             while (toSearch.Count > 0 && !solved)
             {
-                Vertex currentVert = toSearch.Pop();
+                Vertex currentVert = toSearch.ElementAt(0);
+                toSearch.RemoveFirst();
+                currentVert.PrintBoard();
                 searched.Add(currentVert);
+                if(currentVert.depth > Program.deepest)
+                {
+                    Program.deepest = currentVert.depth;
+                }
 
                 if (currentVert.GoalCheck())
                 {
@@ -43,12 +49,15 @@ namespace Zadanie1
 
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
-
-                    if (currentVert.depth < maxDepth && !helper.IsInStack(toSearch, currentVert.children[i]) && !helper.IsInList(searched, currentVert.children[i]))
+                    if (currentVert.depth < maxDepth && /*!helper.IsInStack(toSearch, currentVert.children[i]) &&*/ !helper.IsInList(searched, currentVert.children[i]))
                     {
-                        toSearch.Push(currentVert.children[i]);
+                        if (helper.IsInLinkedList(toSearch, currentVert.children[i]))
+                            toSearch.Remove(currentVert.children[i]);
+                        toSearch.AddFirst(currentVert.children[i]);
                     }
                 }
+                Console.WriteLine(searched.Count);
+                Console.WriteLine(currentVert.depth);
             }
             Program.visited = searched.Count;
             Program.processed = searched.Count + toSearch.Count;

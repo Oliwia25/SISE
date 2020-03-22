@@ -36,7 +36,7 @@ namespace Zadanie1
                 Vertex currentVert = toSearch.ElementAt(0);
                 visited.Add(currentVert);
                 toSearch.Dequeue();
-
+                currentVert.PrintBoard();
                 currentVert.MakeChildren();
 
                 int lowestHvalue = (heurestic == "HAMM") ? currentVert.children[0].CalculateHammingDistance() : currentVert.children[0].CalculateManhattanDistance();
@@ -77,16 +77,32 @@ namespace Zadanie1
                         lowestHindex = i;
                     }
                 }
-                if (!helper.IsInList(visited, currentVert.children[lowestHindex]))
+                if (!helper.IsInList(visited, currentVert.children[lowestHindex]) && !helper.IsInQueue(toSearch, currentVert.children[lowestHindex]))
                 {
                     toSearch.Enqueue(currentVert.children[lowestHindex]);
                 }
                 else
                 {
-                    visited.Add(currentVert.children[lowestHindex]);
-                    currentVert.children.RemoveAt(lowestHindex);
-                    lowestHindex = FindAnotherH(currentVert.children);
+                    //visited.Add(currentVert.children[lowestHindex]);
+                    //currentVert.children.RemoveAt(lowestHindex);
+                    //if(currentVert.children.Count > 0)
+
+                    while (helper.IsInList(visited, currentVert.children[lowestHindex]))
+                    {
+                        if (currentVert.children.Count > 1)
+                        {
+                            currentVert.children.RemoveAt(lowestHindex);
+                            lowestHindex = FindAnotherH(currentVert.children);
+                        }
+                        else
+                        {
+                            Vertex tmp = currentVert;
+                            currentVert = currentVert.parent;
+                            currentVert.children.Remove(tmp);
+                        }
+                    }
                     toSearch.Enqueue(currentVert.children[lowestHindex]);
+                    //Console.WriteLine(currentVert.children.Count);
                 }
 
                 
