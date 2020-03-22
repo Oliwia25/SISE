@@ -12,9 +12,9 @@ namespace Zadanie1
         char[] order;
         public int maxDepth = 21;
         public List<Vertex> solution;
-        public List<Vertex> searched;
-        public List<Vertex> made;
-        public LinkedList<Vertex> toSearch;
+        public List<Vertex> odwiedzone;
+        public List<Vertex> przetworzone;
+        //public LinkedList<Vertex> toSearch;
         public Vertex winner;
         public bool solved;
 
@@ -23,14 +23,15 @@ namespace Zadanie1
             this.helper = new Helper();
             this.order = order;
             solution = new List<Vertex>();
-            searched = new List<Vertex>();
-            made = new List<Vertex>();
-            toSearch = new LinkedList<Vertex>();
+            odwiedzone = new List<Vertex>();
+            przetworzone = new List<Vertex>();
+            //toSearch = new LinkedList<Vertex>();
             solved = false;
         }
         public List<Vertex> DfsSteps(Vertex root)
         {
-
+            przetworzone.Add(root);
+            //odwiedzone.Add(root);
             SolveWithDFS(root);
             // toSearch.AddFirst(root);
 
@@ -70,17 +71,18 @@ namespace Zadanie1
             //Program.visited = searched.Count;
             //Program.processed = searched.Count + toSearch.Count;
             helper.Track(solution, winner);
-            Program.visited = made.Count;
-            Program.processed = searched.Count;
+            Program.visited = odwiedzone.Count;
+            Program.processed = przetworzone.Count;
             return solution;
         }
 
         public void SolveWithDFS(Vertex currentVert)
         {
-            searched.Add(currentVert);
-            currentVert.PrintBoard();
-            Console.WriteLine(searched.Count);
-            Console.WriteLine(currentVert.depth);
+            odwiedzone.Add(currentVert);
+            //currentVert.PrintBoard();
+            //Console.WriteLine(odwiedzone.Count);
+            //Console.WriteLine(przetworzone.Count);
+            //Console.WriteLine(currentVert.depth);
             if (currentVert.depth > Program.deepest)
             {
                 Program.deepest = currentVert.depth;
@@ -89,29 +91,27 @@ namespace Zadanie1
             {
                 winner = currentVert;
                 solved = true;
+                //return;
             }
-            if (!currentVert.GoalCheck() && !solved)
+            if (!solved)
             {
                 currentVert.MakeChildren(order);
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
-                    if (!helper.IsInList(made, currentVert.children[i]))
+                    if (!helper.IsInList(przetworzone, currentVert.children[i]))
                     {
-                        made.Add(currentVert.children[i]);
+                        przetworzone.Add(currentVert.children[i]);
                     }
                 }
-                //while (currentVert.children.Count > 0 && !solved)
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
-                    if (currentVert.depth < maxDepth && !helper.IsInList(searched, currentVert.children[i]))
+                    while(!solved)
+                    if (currentVert.depth < maxDepth && !helper.IsInList(odwiedzone, currentVert.children[i]))
                     {
                         SolveWithDFS(currentVert.children[i]);
                     }
                 }
-            }
-            
-           // helper.Track(solution, currentVert);
-                        
+            }                                  
         }
     }
 
