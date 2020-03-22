@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    class PriorityQueue
+    class PriorityQueue<T>
     {
-        SortedDictionary<int, Queue<Vertex>> priorityQueue = new SortedDictionary<int, Queue<Vertex>>();
+        public SortedDictionary<int, Queue<Vertex>> priorityQueue = new SortedDictionary<int, Queue<Vertex>>();
 
-        public void Enqueue(int key, Vertex v)
+        public void Add(int key, Vertex v)
         {
             if (!priorityQueue.ContainsKey(key))
             {
@@ -19,7 +19,7 @@ namespace Zadanie1
             priorityQueue[key].Enqueue(v);
         }
 
-        public Vertex Dequeue()
+        public Vertex Remove()
         {
             int minKey = priorityQueue.Keys.Min();
             Vertex v = priorityQueue[minKey].Dequeue();
