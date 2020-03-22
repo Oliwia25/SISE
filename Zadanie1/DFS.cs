@@ -12,9 +12,8 @@ namespace Zadanie1
         char[] order;
         public int maxDepth = 21;
         public List<Vertex> solution;
-        public List<Vertex> odwiedzone;
-        public List<Vertex> przetworzone;
-        //public LinkedList<Vertex> toSearch;
+        public List<Vertex> vis;
+        public List<Vertex> proc;
         public Vertex winner;
         public bool solved;
 
@@ -22,67 +21,24 @@ namespace Zadanie1
         {
             this.helper = new Helper();
             this.order = order;
-            solution = new List<Vertex>();
-            odwiedzone = new List<Vertex>();
-            przetworzone = new List<Vertex>();
-            //toSearch = new LinkedList<Vertex>();
-            solved = false;
+            this.solution = new List<Vertex>();
+            this.vis = new List<Vertex>();
+            this.proc = new List<Vertex>();
+            this.solved = false;
         }
         public List<Vertex> DfsSteps(Vertex root)
         {
-            przetworzone.Add(root);
-            //odwiedzone.Add(root);
+            proc.Add(root);
             SolveWithDFS(root);
-            // toSearch.AddFirst(root);
-
-            // while (toSearch.Count > 0 && !solved)
-            // {
-            //Vertex currentVert = toSearch.ElementAt(0);
-            //toSearch.RemoveFirst();
-            //currentVert.PrintBoard();
-            //searched.Add(currentVert);
-            //if(currentVert.depth > Program.deepest)
-            //{
-            //    Program.deepest = currentVert.depth;
-            //}
-
-            //if (currentVert.GoalCheck())
-            //{
-            //    solved = true;
-            //    helper.Track(solution, currentVert);
-            //    break;
-            //}
-
-            //currentVert.MakeChildren(order);
-            //currentVert.children.Reverse();
-
-            //for (int i = 0; i < currentVert.children.Count; i++)
-            //{
-            //    if (currentVert.depth < maxDepth && /*!helper.IsInStack(toSearch, currentVert.children[i]) &&*/ !helper.IsInList(searched, currentVert.children[i]))
-            //    {
-            //        if (helper.IsInLinkedList(toSearch, currentVert.children[i]))
-            //            toSearch.Remove(currentVert.children[i]);
-            //        toSearch.AddFirst(currentVert.children[i]);
-            //    }
-            //}
-            //Console.WriteLine(searched.Count);
-            //Console.WriteLine(currentVert.depth);
-            // }
-            //Program.visited = searched.Count;
-            //Program.processed = searched.Count + toSearch.Count;
             helper.Track(solution, winner);
-            Program.visited = odwiedzone.Count;
-            Program.processed = przetworzone.Count;
+            Program.visited = vis.Count;
+            Program.processed = proc.Count;
             return solution;
         }
 
         public void SolveWithDFS(Vertex currentVert)
         {
-            odwiedzone.Add(currentVert);
-            //currentVert.PrintBoard();
-            //Console.WriteLine(odwiedzone.Count);
-            //Console.WriteLine(przetworzone.Count);
-            //Console.WriteLine(currentVert.depth);
+            vis.Add(currentVert);
             if (currentVert.depth > Program.deepest)
             {
                 Program.deepest = currentVert.depth;
@@ -91,29 +47,29 @@ namespace Zadanie1
             {
                 winner = currentVert;
                 solved = true;
-                //return;
+                return;
             }
-            if (!solved)
+            if ((!solved))
             {
                 currentVert.MakeChildren(order);
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
-                    if (!helper.IsInList(przetworzone, currentVert.children[i]))
+                    if (!helper.IsInList(proc, currentVert.children[i]))
                     {
-                        przetworzone.Add(currentVert.children[i]);
+                        proc.Add(currentVert.children[i]);
                     }
                 }
                 for (int i = 0; i < currentVert.children.Count; i++)
                 {
-                    while(!solved)
-                    if (currentVert.depth < maxDepth && !helper.IsInList(odwiedzone, currentVert.children[i]))
+                    if (currentVert.depth < maxDepth)
                     {
                         SolveWithDFS(currentVert.children[i]);
+
                     }
                 }
-            }                                  
+            }
         }
     }
 
-    
+
 }

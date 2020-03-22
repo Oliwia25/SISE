@@ -28,9 +28,9 @@ namespace Zadanie1
             int[] intList = stringList.Select(arg => int.Parse(arg)).ToArray();
 
             Vertex initVert = new Vertex(intList);
-            Console.WriteLine();
+           // Console.WriteLine();
             Console.WriteLine(inputFile);
-            initVert.PrintBoard();
+            //initVert.PrintBoard();
             List<Vertex> solution = new List<Vertex>();
 
             string algorithm = args[0];
@@ -71,13 +71,13 @@ namespace Zadanie1
 
             string solutionFile = args[3];
             string statisticFile = args[4];
-            Console.WriteLine();
-            Console.Write("SOLUTION: ");
-            Console.WriteLine();
-            for (int i = solution.Count - 1; i >= 0; i--)
-            {
-                solution[i].PrintBoard();
-            }
+            //Console.WriteLine();
+            //Console.Write("SOLUTION: ");
+            //Console.WriteLine();
+            //for (int i = solution.Count - 1; i >= 0; i--)
+            //{
+            //    solution[i].PrintBoard();
+            //}
 
             List<string> toSolutionFile = new List<string>();
             List<string> toStatsFile = new List<string>();
