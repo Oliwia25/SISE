@@ -19,49 +19,57 @@ namespace Zadanie1
 
         public List<Vertex> AStarSteps(Vertex root)
         {
+            AStarPriorityQueue<Vertex> toSearch = new AStarPriorityQueue<Vertex>();// na taki
+            List<Vertex> visited = new List<Vertex>();
             List<Vertex> solution = new List<Vertex>();
 
-            PriorityQueue<Vertex> toSearch = new PriorityQueue<Vertex>();
-            List<Vertex> visited = new List<Vertex>();
-
-            int processed = 0;
+            int processedVertexCount = 0;
             bool solved = false;
             toSearch.Add(-1, root);
 
             while (toSearch.priorityQueue.Count > 0 && !solved)
             {
-                Vertex currentVertex = toSearch.Remove();
-                if (visited.Count != 0)
+                Vertex currentVert = toSearch.GetFirst();
+                if (currentVert.depth > Program.deepest)
                 {
-                    while (helper.IsInList(visited, currentVertex))
-                    {
-                        currentVertex = toSearch.Remove();
-                    }
-
+                    Program.deepest = currentVert.depth;
                 }
-
-                if (currentVertex.GoalCheck())
+                while (helper.IsInList(visited, currentVert))
+                {
+                    currentVert = toSearch.GetFirst();
+                }
+                if (currentVert.GoalCheck())
                 {
                     solved = true;
-                    helper.Track(solution, currentVertex);
+                    helper.Track(solution, currentVert);
                     break;
                 }
-                currentVertex.MakeChildren();
+                currentVert.MakeChildren();
 
-                for (int i = 0; i < currentVertex.children.Count; i++)
+                for (int i = 0; i < currentVert.children.Count; i++)
                 {
-                    int countedH = (heurestic == "HAMM") ? currentVertex.children[i].CalculateHammingDistance() : currentVertex.children[i].CalculateManhattanDistance();
-                    toSearch.Add(countedH, currentVertex.children[i]);
-                    processed++;
+                    int countedH;
+                    if (heurestic == "HAMM")
+                    {
+                        countedH = currentVert.children[i].CalculateHammingDistance();
+                    }
+                    else 
+                    {
+                        countedH = currentVert.children[i].CalculateManhattanDistance();
+                    }
+                    toSearch.Add(countedH, currentVert.children[i]);
+                    processedVertexCount += 1;
                 }
-                visited.Add(currentVertex);
+                visited.Add(currentVert);
 
             }
             Program.visited = visited.Count;
-            Program.processed = processed + 1;
+            Program.processed = processedVertexCount + 1;
             return solution;
         }
 
     }
 
 }
+
+

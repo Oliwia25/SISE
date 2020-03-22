@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    class PriorityQueue<T>
+    class AStarPriorityQueue<T>
     {
         public SortedDictionary<int, Queue<Vertex>> priorityQueue = new SortedDictionary<int, Queue<Vertex>>();
 
@@ -19,7 +19,7 @@ namespace Zadanie1
             priorityQueue[key].Enqueue(v);
         }
 
-        public Vertex Remove()
+        public Vertex GetFirst()
         {
             int minKey = priorityQueue.Keys.Min();
             Vertex v = priorityQueue[minKey].Dequeue();

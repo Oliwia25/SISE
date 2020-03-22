@@ -205,6 +205,7 @@ namespace Zadanie1
                     h++;
                 }
             }
+            h += this.depth;
             return h;
         }
 
@@ -224,6 +225,7 @@ namespace Zadanie1
                     this.h += Math.Abs(CorrectX - IncorrectX) + Math.Abs(CorrectY - IncorrectY);
                 }
             }
+            h += this.depth;
             return h;
         }
     }
