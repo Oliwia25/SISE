@@ -20,7 +20,14 @@ namespace Zadanie2
         public double Output { get => _output; set => _output = value; }
         internal List<Entry> Entries { get => _entries; set => _entries = value; }
 
-        public void CountWeight(double learningRate, double delta)//korekta wag
+        public void UpdateWeights(double newWeight)
+        {
+            for (int i = 0; i < _entries.Count; i++)
+            {
+                _entries[i].Weight = newWeight;
+            }
+        }
+        public void CountWeight(double learningRate, double delta)//korekta wag;to chyba nie będzie używane na rzecz tego UpdateWeights ale nwm to na razie zostawiam
         {
             _weight += learningRate * delta;
             foreach (var e in Entries)
@@ -55,5 +62,7 @@ namespace Zadanie2
             _output = Sum();
             _output = Activation(_output);
         }
+
+       
     }
 }

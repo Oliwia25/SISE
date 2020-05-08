@@ -28,12 +28,32 @@ namespace Zadanie2
             _name = name;
         }
 
-        public void CountWeight(double learningRate, double delta)
+        public void Forward()
         {
-            for(int i = 0; i < _neurons.Count(); i++)
+            for(int i = 0; i < _neurons.Count; i++)
+            {
+                _neurons[i].Fire();
+            }
+        }
+
+        public void OptimizeWeights(double learningRate, double delta)
+        {
+            _weight += learningRate * delta;
+            for(int i = 0; i < _neurons.Count; i++)
+            {
+                _neurons[i].UpdateWeights(_weight);
+            }
+        }
+
+
+        public void CountWeights(double learningRate, double delta)
+        {
+            for(int i = 0; i < _neurons.Count; i++)
             {
                 _neurons[i].CountWeight(learningRate, delta);
             }
         }
+     
+
     }
 }
