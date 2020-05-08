@@ -10,6 +10,7 @@ namespace Zadanie2
     {
         static void Main(string[] args)
         {
+            Console.ReadLine(); //żeby się konsola nie zamykała od razu
         }
     }
 }
