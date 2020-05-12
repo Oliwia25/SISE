@@ -16,7 +16,7 @@ namespace Zadanie2
         //public string Name { get => _name; set => _name = value; }
         public double Weight { get => _weight; set => _weight = value; }
 
-        public Layer(int neuronsNumber)//, string name = " ")
+        public Layer(int neuronsNumber, double initialWeight)//, string name = " ")
         {
             _neurons = new List<Neuron>();
             for(int i = 0; i < neuronsNumber; i++)
@@ -24,7 +24,7 @@ namespace Zadanie2
                 _neurons.Add(new Neuron()); 
             }
 
-            _weight = new Random().NextDouble() * (-2) + 1;
+            _weight = initialWeight;
             //_name = name;
         }
 
