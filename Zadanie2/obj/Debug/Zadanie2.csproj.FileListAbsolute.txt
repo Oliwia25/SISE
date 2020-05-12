@@ -4,3 +4,10 @@ C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie2\bin\Debug\Zadanie2.pdb
 C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie2\obj\Debug\Zadanie2.csprojAssemblyReference.cache
 C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie2\obj\Debug\Zadanie2.exe
 C:\Users\Olivia\Desktop\gitHub\SISE\Zadanie2\obj\Debug\Zadanie2.pdb
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie2\bin\Debug\Zadanie2.exe.config
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie2\bin\Debug\Zadanie2.exe
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie2\bin\Debug\Zadanie2.pdb
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie2\obj\Debug\Zadanie2.csprojAssemblyReference.cache
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie2\obj\Debug\Zadanie2.csproj.CoreCompileInputs.cache
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie2\obj\Debug\Zadanie2.exe
+E:\Rzeczy\FTiMS\sem6\SISE\SISE\Zadanie2\obj\Debug\Zadanie2.pdb

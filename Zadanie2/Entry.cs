@@ -13,5 +13,11 @@ namespace Zadanie2
 
         public double Input { get => _input; set => _input = value; }
         public double Weight { get => _weight; set => _weight = value; }
+
+        //public Entry(double input)
+        //{
+        //    _input = input;
+        //    _weight = new Random().NextDouble() * (-2) - 1;
+        //}
     }
 }

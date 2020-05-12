@@ -19,28 +19,27 @@ namespace Zadanie2
         }
 
         public void AddLayer(Layer layer)
-        { //dendryt - "wejscie" neuronu, przez niego trafiają sygnały 
-            int dendriteNumber = 1;
+        { 
+            int entryNumber = 1;
 
             if (_layers.Count > 0)
             {
-                dendriteNumber = _layers.Last().Neurons.Count; //?
+                entryNumber = _layers.Last().Neurons.Count; 
             }
 
-            for (int i = 0; i < layer.Neurons.Count; i++)
+            foreach (var n in layer.Neurons)
             {
-                layer.Neurons[i].Entries.Add(new Entry());
+                for (int i = 0; i < entryNumber; i++)
+                {
+                    n.Entries.Add(new Entry());
+                }
             }
         }
 
         public void BuildNetwork()
         {
-            for (int i = 0; i < _layers.Count; i++)
+            for (int i = 0; i < _layers.Count - 1; i++) // ok?
             {
-                if (i >= _layers.Count - 1)
-                {
-                    break;
-                }
                 var nextLayer = _layers[i + 1];
                 CreateNetwork(_layers[i], nextLayer);
             }
@@ -60,16 +59,16 @@ namespace Zadanie2
         public void PrintNewtork()
         {
             DataTable products = new DataTable();
-            products.Columns.Add("Name");
+            //products.Columns.Add("Name");
             products.Columns.Add("Neurons");
             products.Columns.Add("Weight");
 
             foreach (var element in Layers)
             {
                 DataRow row = products.NewRow();
-                row[0] = element.Name;
-                row[1] = element.Neurons.Count;
-                row[2] = element.Weight;
+                //row[0] = element.Name;
+                row[0] = element.Neurons.Count;
+                row[1] = element.Weight;
 
                 products.Rows.Add(row);
             }
@@ -91,41 +90,41 @@ namespace Zadanie2
             }
         }
 
-        public void CountOutput() 
-        {
-            bool firstLayer = true;
-            for(int i = 0; i < _layers.Count; i++)
-            {
-                //omijamy 1 warstwę bo to input?
-                if(firstLayer)
-                {
-                    firstLayer = false;
-                    continue;
-                }
-                _layers[i].Forward(); //forward wykonuje fire dla każdej wartswy 
-            }
-        }
+        //public void CountOutput() 
+        //{
+        //    bool firstLayer = true;
+        //    for(int i = 0; i < _layers.Count; i++)
+        //    {
+        //        //omijamy 1 warstwę bo to input?
+        //        if(firstLayer)
+        //        {
+        //            firstLayer = false;
+        //            continue;
+        //        }
+        //        _layers[i].Forward(); //forward wykonuje fire dla każdej wartswy 
+        //    }
+        //}
 
-        public void OptimizeWeights(double accuracy)
-        {
-            float learningRate = 0.1f;
-            //Pomiń jeżeli accuracy osiągnęła 100%
-            if (accuracy == 1)
-            {
-                return;
-            }
+        //public void OptimizeWeights(double accuracy)
+        //{
+        //    float learningRate = 0.1f;
+        //    //Pomiń jeżeli accuracy osiągnęła 100%
+        //    if (accuracy == 1)
+        //    {
+        //        return;
+        //    }
 
-            if (accuracy > 1)
-            {
-                learningRate = -learningRate;
-            }
+        //    if (accuracy > 1)
+        //    {
+        //        learningRate = -learningRate;
+        //    }
 
-            //Update the weights for all the layers
-            for(int i = 0; i < _layers.Count; i++)
-            {
-                _layers[i].OptimizeWeights(learningRate, 1);
-            }
-        }
+        //    //Update the weights for all the layers
+        //    for(int i = 0; i < _layers.Count; i++)
+        //    {
+        //        _layers[i].OptimizeWeights(learningRate, 1);
+        //    }
+        //}
 
         //public void TrainNetwork(NeuralData X, NeuralData Y, int iterations, double learningRate = 0.1)
         //{

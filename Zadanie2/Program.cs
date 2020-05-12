@@ -10,11 +10,13 @@ namespace Zadanie2
     {
         static void Main(string[] args)
         {
+            int neuronsHiddenLayer = int.Parse(Console.ReadLine());
+
             //tests
             Network _newtork = new Network();
-            _newtork.Layers.Add(new Layer(2, 0.1, "INPUT"));
-            _newtork.Layers.Add(new Layer(2, 0.1, "HIDDEN"));
-            _newtork.Layers.Add(new Layer(1, 0.1, "OUTPUT"));
+            _newtork.Layers.Add(new Layer(1));
+            _newtork.Layers.Add(new Layer(neuronsHiddenLayer));
+            _newtork.Layers.Add(new Layer(1));
 
             _newtork.BuildNetwork();
             _newtork.PrintNewtork();
