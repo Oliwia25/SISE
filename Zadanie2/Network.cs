@@ -90,20 +90,19 @@ namespace Zadanie2
             }
         }
 
-        //public void CountOutput() 
-        //{
-        //    bool firstLayer = true;
-        //    for(int i = 0; i < _layers.Count; i++)
-        //    {
-        //        //omijamy 1 warstwę bo to input?
-        //        if(firstLayer)
-        //        {
-        //            firstLayer = false;
-        //            continue;
-        //        }
-        //        _layers[i].Forward(); //forward wykonuje fire dla każdej wartswy 
-        //    }
-        //}
+        public void CalculateOutput()
+        {
+            bool firstLayer = true;
+            for (int i = 0; i < _layers.Count; i++)
+            {
+                if (firstLayer)
+                {
+                    firstLayer = false;
+                    continue;
+                }
+                _layers[i].Forward(); 
+            }
+        }
 
         //public void OptimizeWeights(double accuracy)
         //{
@@ -129,7 +128,7 @@ namespace Zadanie2
         //public void TrainNetwork(NeuralData X, NeuralData Y, int iterations, double learningRate = 0.1)
         //{
         //    int epoch = 1;
-            
+
         //    while(iterations >= epoch)
         //    {
 

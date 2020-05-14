@@ -28,13 +28,13 @@ namespace Zadanie2
             //_name = name;
         }
 
-        //public void Forward()
-        //{
-        //    for(int i = 0; i < _neurons.Count; i++)
-        //    {
-        //        _neurons[i].Fire();
-        //    }
-        //}
+        public void Forward()
+        {
+            for (int i = 0; i < _neurons.Count; i++)
+            {
+                _neurons[i].Calculate();
+            }
+        }
 
         //public void OptimizeWeights(double learningRate, double delta)
         //{

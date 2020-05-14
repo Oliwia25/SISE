@@ -52,7 +52,7 @@ namespace Zadanie2
             return 1.0 / (1.0 + Math.Exp(-input));
         }
 
-        public void Fire()
+        public void Calculate()
         {
             _output = Sum();
             _output = Activation(_output);
