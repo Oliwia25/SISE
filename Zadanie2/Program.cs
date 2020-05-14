@@ -27,9 +27,14 @@ namespace Zadanie2
             //_newtork.Layers.Add(new Layer(neuronsHiddenLayer));
             //_newtork.Layers.Add(new Layer(2));
 
+            Console.WriteLine("Before training: ");
             _newtork.BuildNetwork();
             _newtork.PrintNewtork();
 
+            _newtork.TrainNetwork(DataX, DataY, 100);
+
+            Console.WriteLine("After training: ");
+            _newtork.PrintNewtork();
             Console.ReadLine(); //żeby się konsola nie zamykała od razu
         }
     }

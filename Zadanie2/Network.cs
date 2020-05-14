@@ -129,7 +129,7 @@ namespace Zadanie2
             }
         }
 
-        public void TrainNetwork(List<List<double>> DataX, List<List<double>> DataY, int iterations, double learningRate = 0.1)
+        public void TrainNetwork(List<List<double>> DataX, List<List<double>> DataY, int iterations)
         {
             int epoch = 1;
 
