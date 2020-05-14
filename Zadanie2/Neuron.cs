@@ -10,7 +10,7 @@ namespace Zadanie2
     {
         private List<Entry> _entries;
         private double _output;
-        private double _weight;
+        private double _delta;
 
         public Neuron()
         {
@@ -19,21 +19,16 @@ namespace Zadanie2
 
         public double Output { get => _output; set => _output = value; }
         public List<Entry> Entries { get => _entries; set => _entries = value; }
+        public double Delta { get => _delta; set => _delta = value; }
 
-        //public void UpdateWeights(double newWeight)
-        //{
-        //    for (int i = 0; i < _entries.Count; i++)
-        //    {
-        //        _entries[i].Weight = newWeight;
-        //    }
-        //}
-
-        public void CountWeight(double learningRate, double delta)
+        public void UpdateWeights(double momentum, double learningRate)
         {
-            _weight += learningRate * delta;
+            double derivative = Derivative();
             foreach (var e in Entries)
             {
-                e.Weight = _weight;
+                double newDelta = e.DeltaWeight * momentum - e.Input * learningRate * Delta * derivative;
+                e.DeltaWeight = newDelta;
+                e.Weight += e.DeltaWeight;
             }
         }
 
@@ -58,6 +53,9 @@ namespace Zadanie2
             _output = Activation(_output);
         }
 
-       
+        public double Derivative()
+        {
+            return _output * (1 - _output);
+        }
     }
 }

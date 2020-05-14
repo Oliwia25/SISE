@@ -34,6 +34,7 @@ namespace Zadanie2
                     n.Entries.Add(new Entry());
                 }
             }
+            _layers.Add(layer);
         }
 
         public void BuildNetwork()
@@ -47,11 +48,16 @@ namespace Zadanie2
 
         private void CreateNetwork(Layer connectingFrom, Layer connectingTo)
         {
+            Random rand = new Random();
+            for (int i = 0; i < connectingFrom.Neurons.Count; i++)
+            {
+                connectingTo.Neurons[i].Entries.Add(new Entry());
+            }
             for (int i = 0; i < connectingTo.Neurons.Count; i++)
             {
                 for (int j = 0; j < connectingFrom.Neurons.Count; j++)
                 {
-                    connectingTo.Neurons[i].Entries.Add(new Entry() { Input = connectingTo.Neurons[i].Output, Weight = connectingTo.Weight });
+                    connectingTo.Neurons[i].Entries.Add(new Entry() { Input = connectingFrom.Neurons[j].Output, Weight = rand.NextDouble() * (-2) + 1 });
                 }
             }
         }
@@ -59,16 +65,13 @@ namespace Zadanie2
         public void PrintNewtork()
         {
             DataTable products = new DataTable();
-            //products.Columns.Add("Name");
             products.Columns.Add("Neurons");
-            products.Columns.Add("Weight");
 
             foreach (var element in Layers)
             {
                 DataRow row = products.NewRow();
                 //row[0] = element.Name;
                 row[0] = element.Neurons.Count;
-                row[1] = element.Weight;
 
                 products.Rows.Add(row);
             }
@@ -104,36 +107,72 @@ namespace Zadanie2
             }
         }
 
-        //public void OptimizeWeights(double accuracy)
-        //{
-        //    float learningRate = 0.1f;
-        //    //Pomiń jeżeli accuracy osiągnęła 100%
-        //    if (accuracy == 1)
-        //    {
-        //        return;
-        //    }
+        public void OptimizeWeights(double accuracy)
+        {
+            double momentum = 0.0;
+            double learningRate = 0.2;
+            //Pomiń jeżeli accuracy osiągnęła 100%
+            if (accuracy == 1)
+            {
+                return;
+            }
 
-        //    if (accuracy > 1)
-        //    {
-        //        learningRate = -learningRate;
-        //    }
+            if (accuracy > 1)
+            {
+                learningRate = -learningRate;
+            }
 
-        //    //Update the weights for all the layers
-        //    for(int i = 0; i < _layers.Count; i++)
-        //    {
-        //        _layers[i].OptimizeWeights(learningRate, 1);
-        //    }
-        //}
+            //Update the weights for all the layers
+            for (int i = 0; i < _layers.Count; i++)
+            {
+                _layers[i].CountWeights(momentum, learningRate);
+            }
+        }
 
-        //public void TrainNetwork(NeuralData X, NeuralData Y, int iterations, double learningRate = 0.1)
-        //{
-        //    int epoch = 1;
+        public void TrainNetwork(List<List<double>> DataX, List<List<double>> DataY, int iterations, double learningRate = 0.1)
+        {
+            int epoch = 1;
 
-        //    while(iterations >= epoch)
-        //    {
+            while (iterations >= epoch)
+            {
+                var inputLayer = Layers[0];
+                //List<double> outputs = new List<double>();
 
-        //    }
-        //}
+                //Forward dla jednego punktu
+                for (int i = 0; i < DataX.Count; i++)
+                {
+                    for (int j = 0; j < DataX[j].Count; j++)
+                    {
+                        inputLayer.Neurons[j].Output = DataX[i][j];
+                    }
+
+                    CalculateOutput();
+                    //  outputs.Add(Layers.Last().Neurons.First().Output);
+
+                    //Obliczenie delty dla wszystkich neuronów, warstwami od końca
+                        //Last layer
+                    for (int k = 0; k < _layers.Last().Neurons.Count; k++)
+                    {
+                        _layers.Last().Neurons[k].Delta = DataY[i][k] - _layers.Last().Neurons[k].Output;
+                    }
+                        //Hidden Layer
+                    for (int k = 0; k < _layers[1].Neurons.Count; k++)
+                    {
+                        double sum = 0.0;
+                        for (int l = 0; l < _layers.Last().Neurons.Count; l++)
+                        {
+                            sum += _layers.Last().Neurons[l].Delta * _layers.Last().Neurons[l].Entries[k].DeltaWeight;
+                        }
+                        _layers[1].Neurons[k].Delta = sum;
+                    }
+
+                    //Update weights
+                    OptimizeWeights(1);
+                }
+
+                
+            }
+        }
 
     }
 }

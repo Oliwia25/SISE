@@ -10,14 +10,10 @@ namespace Zadanie2
     {
         private double _input;
         private double _weight;
+        private double _deltaWeight;
 
         public double Input { get => _input; set => _input = value; }
         public double Weight { get => _weight; set => _weight = value; }
-
-        //public Entry(double input)
-        //{
-        //    _input = input;
-        //    _weight = new Random().NextDouble() * (-2) - 1;
-        //}
+        public double DeltaWeight { get => _deltaWeight; set => _deltaWeight = value; }
     }
 }

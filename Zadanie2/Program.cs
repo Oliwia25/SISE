@@ -10,14 +10,22 @@ namespace Zadanie2
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Insert the number of neurons in the hidden layer: ");
             int neuronsHiddenLayer = int.Parse(Console.ReadLine());
 
-            Random rand = new Random();
-            //tests
+            // WCZYTANIE DANYCH Z PLIKU DO DWÓCH LIST X - INPUT, Y - REQUIRED
+
+            List<List<double>> DataX = new List<List<double>>();
+            List<List<double>> DataY = new List<List<double>>();
+
+            
             Network _newtork = new Network();
-            _newtork.Layers.Add(new Layer(1, rand.NextDouble() * (-2) + 1));
-            _newtork.Layers.Add(new Layer(neuronsHiddenLayer, rand.NextDouble() * (-2) + 1));
-            _newtork.Layers.Add(new Layer(1, rand.NextDouble() * (-2) + 1));
+            _newtork.AddLayer(new Layer(1));
+            _newtork.AddLayer(new Layer(neuronsHiddenLayer));
+            _newtork.AddLayer(new Layer(2));
+            //_newtork.Layers.Add(new Layer(1));
+            //_newtork.Layers.Add(new Layer(neuronsHiddenLayer));
+            //_newtork.Layers.Add(new Layer(2));
 
             _newtork.BuildNetwork();
             _newtork.PrintNewtork();
