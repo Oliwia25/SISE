@@ -21,7 +21,7 @@ namespace Zadanie2
 
             List<double> X = new List<double>();
             List<double> Y = new List<double>();
-            string[] lines = File.ReadAllLines("C:/Users/Olivia/Desktop/gitHub/SISE/Zadanie2/test.TXT");
+            string[] lines = File.ReadAllLines("../Zadanie2/test.TXT");
             //string firstValue;
             foreach (var line in lines)
             {
