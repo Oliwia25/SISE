@@ -51,7 +51,7 @@ namespace Zadanie2
             Random rand = new Random();
             for (int i = 0; i < connectingFrom.Neurons.Count; i++)
             {
-                connectingTo.Neurons[i].Entries.Add(new Entry());
+                connectingFrom.Neurons[i].Entries.Add(new Entry());
             }
             for (int i = 0; i < connectingTo.Neurons.Count; i++)
             {
