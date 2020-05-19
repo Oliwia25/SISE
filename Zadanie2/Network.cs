@@ -181,10 +181,8 @@ namespace Zadanie2
 
                     //Update weights
                     //OptimizeWeights();
-                    epoch += 1;
                 }
-
-                
+                epoch++;                
             }
         }      
 
