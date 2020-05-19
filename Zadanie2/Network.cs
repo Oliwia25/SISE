@@ -166,6 +166,9 @@ namespace Zadanie2
                         _layers[1].Neurons[k].Delta = sum;
                     }
 
+                    //Obliczenie dystrybuanty
+
+
                     //Update weights
                     OptimizeWeights(1);
                 }
