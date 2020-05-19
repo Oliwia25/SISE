@@ -15,15 +15,13 @@ namespace Zadanie2
             int neuronsHiddenLayer = int.Parse(Console.ReadLine());
 
             // WCZYTANIE DANYCH Z PLIKU DO DWÓCH LIST 
-            List<List<double>> Input = new List<List<double>>();
-            List<List<double>> Required = new List<List<double>>();
+            List<List<double>> Data = new List<List<double>>();
 
             string[] lines = File.ReadAllLines("../../test.txt");
             
             foreach (var line in lines)
             {
                 List<double> X = new List<double>();
-                List<double> Y = new List<double>();
                 var thirdColumnValues = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries)[3];
                 var fourthColumnValues = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries)[4];
                 var fifthColumnValues = line.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries)[5];
@@ -34,26 +32,18 @@ namespace Zadanie2
                 double dataRequired2 = double.Parse(sixthColumnValues, System.Globalization.CultureInfo.InvariantCulture);
                 X.Add(dataInput1);
                 X.Add(dataInput2);
-                Input.Add(X);
-
-                Y.Add(dataRequired1);
-                Y.Add(dataRequired2);
-                Required.Add(Y);
+                X.Add(dataRequired1);
+                X.Add(dataRequired2);
+                Data.Add(X);
             }
 
-            //foreach (var xData in Input)
+            //foreach (var xData in Data)
             //{
             //    Console.WriteLine();
             //    foreach (var x in xData)
-            //        Console.Write("x: " + x + " ");               
+            //        Console.Write("x: " + x + " ");
             //}
             //Console.WriteLine();
-            //foreach (var yData in Required)
-            //{
-            //    Console.WriteLine();
-            //    for (int i = 0; i < 2; i++)
-            //        Console.Write("x: " + yData[i] + " ");
-            //}
 
             Network _newtork = new Network();
             _newtork.AddLayer(new Layer(2));
@@ -68,7 +58,7 @@ namespace Zadanie2
             _newtork.BuildNetwork();
             _newtork.PrintNewtork();
 
-            _newtork.TrainNetwork(Input, Required, 2);
+            _newtork.TrainNetwork(Data, 10);
 
             Console.WriteLine("After training: ");
             _newtork.PrintNewtork();
