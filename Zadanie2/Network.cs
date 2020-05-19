@@ -10,8 +10,10 @@ namespace Zadanie2
     class Network
     {
         private List<Layer> _layers;
+        private List<Double> _distribution;
 
         public List<Layer> Layers { get => _layers; set => _layers = value; }
+        private List<Double> Distribution { get => _distribution; set => _distribution = value; }
 
         public Network()
         {
@@ -132,6 +134,7 @@ namespace Zadanie2
         public void TrainNetwork(List<List<double>> Data, int iterations)
         {
             int epoch = 1;
+            int numberOfWrongSamples = 0;
 
             while (iterations >= epoch)
             {
@@ -178,6 +181,17 @@ namespace Zadanie2
                     }
 
                     //Obliczenie błędu
+                    //_layers.Last().Neurons[k].Delta = Math.Sqrt(Math.Pow(Data[i][k + 2], 2) + Math.Pow(_layers.Last().Neurons[k].Output, 2));
+                    double error = Math.Sqrt(Math.Pow(_layers.Last().Neurons[0].Delta,2) + Math.Pow(_layers.Last().Neurons[0].Delta, 2));
+
+                    if(error < i) 
+                    {
+                        numberOfWrongSamples++; //to  jest to L chyba
+                    }
+
+                    //dystrybuanta
+                    double Dys = numberOfWrongSamples / Data.Count;
+                    _distribution.Add(Dys);
 
                     //Update weights
                     //OptimizeWeights();
