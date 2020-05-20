@@ -178,7 +178,7 @@ namespace Zadanie2
                     }
 
                     //Obliczenie błędu
-
+                    double error = Math.Sqrt(Math.Pow(_layers.Last().Neurons[0].Delta, 2) + Math.Pow(_layers.Last().Neurons[1].Delta, 2));
                     //Update weights
                     //OptimizeWeights();
                 }
