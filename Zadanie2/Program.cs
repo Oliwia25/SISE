@@ -36,7 +36,7 @@ namespace Zadanie2
                 X.Add(dataRequired2);
                 Data.Add(X);
             }
-            int epochNumber = 100;
+            int epochNumber = 10;
             Network network = new Network(neuronsHiddenLayer);
 
             network.DrawWeights();

@@ -17,9 +17,9 @@ namespace Zadanie2
         public List<Neuron> Lastlayer { get => _lastLayer; set => _lastLayer = value; }
         public int NumberOfNeuronsInHiddenLayer { get => numberOfNeuronsInHiddenLayer; set => numberOfNeuronsInHiddenLayer = value; }
 
-        public Network(int numberOfNeuronsInHiddenLayer)
+        public Network(int number)
         {
-            this.NumberOfNeuronsInHiddenLayer = numberOfNeuronsInHiddenLayer;
+            numberOfNeuronsInHiddenLayer = number;
             _hiddenLayer = new List<Neuron>();
             _lastLayer = new List<Neuron>();
         }
@@ -39,6 +39,7 @@ namespace Zadanie2
                 n.DrawWeights(numberOfNeuronsInHiddenLayer);
                 _lastLayer.Add(n);
             }
+
         }
 
         public void Train(List<List<double>> dataAllInput, int epochNumber)
@@ -53,7 +54,7 @@ namespace Zadanie2
                     List<double> outputs = new List<double>();//wyjscia pierwszej warstwy = wejscia drugiej
                     //List<double> required;
                     List<double> errors =  new List<double>(); // roznica miedzy wyjsciem, a wartoscia oczekiwana
-                    double avgError = 0; // blad sredniokwadratowy dla jednego zestawu danych
+                    //double avgError = 0; // blad sredniokwadratowy dla jednego zestawu danych
                     List<double> deltaLastLayer = new List<double>(_lastLayer.Count);
 
                     for (int k = 0; k < _hiddenLayer.Count; k++)
@@ -76,7 +77,7 @@ namespace Zadanie2
 
                         for (int w = 0; w < _lastLayer.Count; w++)
                         {
-                            tempWeights.Add(_hiddenLayer[w].GetWeight(k));
+                            tempWeights.Add(_lastLayer[w].GetWeight(k));
                         }
                         _hiddenLayer[k].CalcDeltaHiddenLayer(deltaLastLayer, tempWeights, _lastLayer.Count);
                     }
@@ -86,7 +87,7 @@ namespace Zadanie2
 
 
                     for (int k = 0; k < _hiddenLayer.Count; k++)
-                        _hiddenLayer[i].UpdateWeight(dataAllInput[j]); // zmiana wag w warstwie ukrytej
+                        _hiddenLayer[k].UpdateWeight(dataAllInput[j]); // zmiana wag w warstwie ukrytej
 
                     //for (int k = 0; k < _lastLayer.Count; k++)
                     //{
