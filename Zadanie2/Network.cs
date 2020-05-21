@@ -100,8 +100,8 @@ namespace Zadanie2
                     {
                         for (int q = 0; q < 2; q++)
                         {
-                            Console.WriteLine(dataAllInput[j][q+2]);
-                            Console.WriteLine(_lastLayer[q].Output);
+                            Console.WriteLine("Wejsciowe: "+ Program.denormalize(dataAllInput[j][q+2]));
+                            Console.WriteLine("Wyjsciowe: "+ Program.denormalize(_lastLayer[q].Output));
                         }
                     }
                 }

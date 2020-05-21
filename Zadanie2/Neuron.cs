@@ -13,7 +13,7 @@ namespace Zadanie2
         private double _output;
         private double _sum;
         private double _delta;
-        private double _alpha = 0.7; // krok 
+        private double _alpha = 0.05; // krok 
         private double _beta = 0.0; // momentum
 
 
@@ -62,7 +62,7 @@ namespace Zadanie2
             return _output * (1 - _output);
         }
 
-        public void CalcDeltaLastLayer(double error)
+        public void CalcDeltaLastLayer(double error) //zmienione z * Derivative()
         {
             _delta = error * Derivative();
         }

@@ -7,8 +7,10 @@ using System.IO;
 
 namespace Zadanie2
 {
-    class Program
+    public class Program
     {
+
+        static double normalizeMin = 0, normalizeMax = 6500, normalizeRange = 6500;
         static void Main(string[] args)
         {
             Console.WriteLine("Insert the number of neurons in the hidden layer: ");
@@ -30,13 +32,13 @@ namespace Zadanie2
                 double dataInput2 = double.Parse(fourthColumnValues, System.Globalization.CultureInfo.InvariantCulture);
                 double dataRequired1 = double.Parse(fifthColumnValues, System.Globalization.CultureInfo.InvariantCulture);
                 double dataRequired2 = double.Parse(sixthColumnValues, System.Globalization.CultureInfo.InvariantCulture);
-                X.Add(dataInput1);
-                X.Add(dataInput2);
-                X.Add(dataRequired1);
-                X.Add(dataRequired2);
+                X.Add(normalize(dataInput1));
+                X.Add(normalize(dataInput2));
+                X.Add(normalize(dataRequired1));
+                X.Add(normalize(dataRequired2));
                 Data.Add(X);
             }
-            int epochNumber = 10;
+            int epochNumber = 6000;
             Network network = new Network(neuronsHiddenLayer);
 
             network.DrawWeights();
@@ -68,6 +70,16 @@ namespace Zadanie2
             //Console.WriteLine("After training: ");
             //_newtork.PrintNewtork();
             Console.ReadLine(); //żeby się konsola nie zamykała od razu
+        }
+
+        public static double normalize(double x)
+        {
+            return (x - normalizeMin) / normalizeRange;
+        }
+
+        public static double denormalize(double x)
+        {
+            return (x * normalizeRange) + normalizeMin;
         }
     }
 }
