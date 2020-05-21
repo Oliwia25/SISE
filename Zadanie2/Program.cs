@@ -36,6 +36,11 @@ namespace Zadanie2
                 X.Add(dataRequired2);
                 Data.Add(X);
             }
+            int epochNumber = 100;
+            Network network = new Network(neuronsHiddenLayer);
+
+            network.DrawWeights();
+            network.Train(Data, epochNumber);
 
             //foreach (var xData in Data)
             //{
@@ -45,23 +50,23 @@ namespace Zadanie2
             //}
             //Console.WriteLine();
 
-            Network _newtork = new Network();
-            _newtork.AddLayer(new Layer(2));
-            _newtork.AddLayer(new Layer(neuronsHiddenLayer));
-            _newtork.AddLayer(new Layer(2));
+            //Network _newtork = new Network();
+            //_newtork.AddLayer(new Layer(2));
+            //_newtork.AddLayer(new Layer(neuronsHiddenLayer));
+            //_newtork.AddLayer(new Layer(2));
             //_newtork.Layers.Add(new Layer(1));
             //_newtork.Layers.Add(new Layer(neuronsHiddenLayer));
             //_newtork.Layers.Add(new Layer(2));
             
-            Console.WriteLine();
-            Console.WriteLine("Before training: ");
-            _newtork.BuildNetwork();
-            _newtork.PrintNewtork();
+            //Console.WriteLine();
+            //Console.WriteLine("Before training: ");
+            //_newtork.BuildNetwork();
+            //_newtork.PrintNewtork();
 
-            _newtork.TrainNetwork(Data, 10);
+            //_newtork.TrainNetwork(Data, 10);
 
-            Console.WriteLine("After training: ");
-            _newtork.PrintNewtork();
+            //Console.WriteLine("After training: ");
+            //_newtork.PrintNewtork();
             Console.ReadLine(); //żeby się konsola nie zamykała od razu
         }
     }
