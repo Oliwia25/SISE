@@ -19,7 +19,7 @@ namespace Zadanie2
             // WCZYTANIE DANYCH Z PLIKU DO DWÓCH LIST 
             List<List<double>> Data = new List<List<double>>();
 
-            string[] lines = File.ReadAllLines("../../test.txt");
+            string[] lines = File.ReadAllLines("../../dane.txt");
             
             foreach (var line in lines)
             {
@@ -38,7 +38,7 @@ namespace Zadanie2
                 X.Add(Normalize(dataRequired2));
                 Data.Add(X);
             }
-            int epochNumber = 1000;
+            int epochNumber = 5000;
             Network network = new Network(neuronsHiddenLayer);
 
             network.DrawWeights();
