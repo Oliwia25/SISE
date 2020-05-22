@@ -43,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entry.cs" />
-    <Compile Include="Layer.cs" />
     <Compile Include="MyExtension.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="Neuron.cs" />

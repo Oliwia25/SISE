@@ -47,7 +47,7 @@ namespace Zadanie2
 
             List<double> distribution = new List<double>();
 
-            for(int i = 0; i < 1865; ++i)
+            for(int i = 0; i < 1866; ++i)
             {
                 double wrongSamples = 0.00d;
                 for(int j = 0; j < network.AvgError.Count; ++j)
@@ -67,33 +67,8 @@ namespace Zadanie2
                 distString.Add(distribution[i].ToString());
             }
             System.IO.File.WriteAllLines("../../Dystrybuanta.txt", distString);
-
-            //foreach (var xData in Data)
-            //{
-            //    Console.WriteLine();
-            //    foreach (var x in xData)
-            //        Console.Write("x: " + x + " ");
-            //}
-            //Console.WriteLine();
-
-            //Network _newtork = new Network();
-            //_newtork.AddLayer(new Layer(2));
-            //_newtork.AddLayer(new Layer(neuronsHiddenLayer));
-            //_newtork.AddLayer(new Layer(2));
-            //_newtork.Layers.Add(new Layer(1));
-            //_newtork.Layers.Add(new Layer(neuronsHiddenLayer));
-            //_newtork.Layers.Add(new Layer(2));
-
-            //Console.WriteLine();
-            //Console.WriteLine("Before training: ");
-            //_newtork.BuildNetwork();
-            //_newtork.PrintNewtork();
-
-            //_newtork.TrainNetwork(Data, 10);
-
-            //Console.WriteLine("After training: ");
-            //_newtork.PrintNewtork();
-            Console.ReadLine(); //żeby się konsola nie zamykała od razu
+   
+            Console.ReadLine(); 
         }
 
         public static double Normalize(double x)
