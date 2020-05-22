@@ -44,6 +44,29 @@ namespace Zadanie2
             network.DrawWeights();
             network.Train(Data, epochNumber);
 
+
+            List<double> distribution = new List<double>();
+
+            for(int i = 0; i < network.AvgError.Count; ++i)
+            {
+                int wrongSamples = 0;
+                for(int j = 0; j < network.AvgError.Count; ++j)
+                {
+                    if(network.AvgError[j] < i)
+                    {
+                        wrongSamples++;
+                    }
+                }
+                distribution.Add(wrongSamples / Data.Count);
+            }
+
+            List<string> distString = new List<string>();
+            for(int i = 0; i < distribution.Count; ++i)
+            {
+                distString.Add(distribution[i].ToString());
+            }
+            System.IO.File.WriteAllLines("../../Dystrybuanta.txt", distString);
+
             //foreach (var xData in Data)
             //{
             //    Console.WriteLine();
@@ -59,7 +82,7 @@ namespace Zadanie2
             //_newtork.Layers.Add(new Layer(1));
             //_newtork.Layers.Add(new Layer(neuronsHiddenLayer));
             //_newtork.Layers.Add(new Layer(2));
-            
+
             //Console.WriteLine();
             //Console.WriteLine("Before training: ");
             //_newtork.BuildNetwork();

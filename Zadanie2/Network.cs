@@ -11,17 +11,20 @@ namespace Zadanie2
     {
         private List<Neuron> _hiddenLayer; 
         private List<Neuron> _lastLayer;
+        private List<double> _avgError;
         private int numberOfNeuronsInHiddenLayer;
 
         public List<Neuron> HiddenLayer { get => _hiddenLayer; set => _hiddenLayer = value; }
         public List<Neuron> Lastlayer { get => _lastLayer; set => _lastLayer = value; }
         public int NumberOfNeuronsInHiddenLayer { get => numberOfNeuronsInHiddenLayer; set => numberOfNeuronsInHiddenLayer = value; }
+        public List<double> AvgError { get => _avgError; set => _avgError = value; }
 
         public Network(int number)
         {
             numberOfNeuronsInHiddenLayer = number;
             _hiddenLayer = new List<Neuron>();
             _lastLayer = new List<Neuron>();
+            AvgError = new List<double>();
         }
 
         public void DrawWeights()
@@ -44,6 +47,8 @@ namespace Zadanie2
 
         public void Train(List<List<double>> dataAllInput, int epochNumber)
         {
+            int wrongSamples = 0;
+            
             for (int i = 0; i < epochNumber; i++) //poczatek epoki
             {
                 Console.WriteLine("Epoch number: " + i);
@@ -82,6 +87,9 @@ namespace Zadanie2
                         _hiddenLayer[k].CalcDeltaHiddenLayer(deltaLastLayer, tempWeights, _lastLayer.Count);
                     }
 
+                    double error = Math.Sqrt(Math.Pow(_lastLayer[0].Delta, 2) + Math.Pow(_lastLayer[1].Delta, 2));
+                    _avgError.Add(error); // błąd pomiaru
+                                        
                     for (int k = 0; k < _lastLayer.Count; k++)
                         _lastLayer[k].UpdateWeight(outputs); // zmiana wag w warstwie ostatniej
 
