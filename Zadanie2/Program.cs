@@ -38,7 +38,7 @@ namespace Zadanie2
                 X.Add(Normalize(dataRequired2));
                 Data.Add(X);
             }
-            int epochNumber = 1868;
+            int epochNumber = 2000;
             Network network = new Network(neuronsHiddenLayer);
 
             network.DrawWeights();
@@ -47,7 +47,7 @@ namespace Zadanie2
 
             List<double> distribution = new List<double>();
 
-            for(int i = 0; i < network.AvgError.Count; ++i)
+            for(int i = 0; i < 1865; ++i)
             {
                 double wrongSamples = 0.00d;
                 for(int j = 0; j < network.AvgError.Count; ++j)
@@ -58,7 +58,7 @@ namespace Zadanie2
                     }
                 }
                 Console.WriteLine("samp: " + wrongSamples);
-                distribution.Add(wrongSamples / epochNumber);
+                distribution.Add(wrongSamples / Data.Count);
             }
 
             List<string> distString = new List<string>();

@@ -101,6 +101,10 @@ namespace Zadanie2
 
                     if (i == (epochNumber-1))
                     {
+                        double error = Math.Sqrt(Math.Pow(_lastLayer[0].Delta, 2) + Math.Pow(_lastLayer[1].Delta, 2));
+                        Console.WriteLine("error: " + Program.Denormalize(error));
+                        _avgError.Add(Program.Denormalize(error)); // błąd pomiaru
+
                         for (int q = 0; q < 2; q++)
                         {
                             Console.WriteLine("Wejsciowe: "+ Program.Denormalize(dataAllInput[j][q+2]));
@@ -108,9 +112,7 @@ namespace Zadanie2
                         }
                     }
                 }
-                double error = Math.Sqrt(Math.Pow(_lastLayer[0].Delta, 2) + Math.Pow(_lastLayer[1].Delta, 2));
-                Console.WriteLine("error: " + Program.Denormalize(error));
-                _avgError.Add(Program.Denormalize(error)); // błąd pomiaru
+                
             }
 
         }
