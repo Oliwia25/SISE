@@ -13,7 +13,7 @@ namespace Zadanie2
         private double _output;
         private double _sum;
         private double _delta;
-        private double _alpha = 0.05; // krok 
+        private double _alpha = 0.01; // krok 
         private double _beta = 0.0; // momentum
 
 

@@ -32,13 +32,13 @@ namespace Zadanie2
                 double dataInput2 = double.Parse(fourthColumnValues, System.Globalization.CultureInfo.InvariantCulture);
                 double dataRequired1 = double.Parse(fifthColumnValues, System.Globalization.CultureInfo.InvariantCulture);
                 double dataRequired2 = double.Parse(sixthColumnValues, System.Globalization.CultureInfo.InvariantCulture);
-                X.Add(normalize(dataInput1));
-                X.Add(normalize(dataInput2));
-                X.Add(normalize(dataRequired1));
-                X.Add(normalize(dataRequired2));
+                X.Add(Normalize(dataInput1));
+                X.Add(Normalize(dataInput2));
+                X.Add(Normalize(dataRequired1));
+                X.Add(Normalize(dataRequired2));
                 Data.Add(X);
             }
-            int epochNumber = 6000;
+            int epochNumber = 1000;
             Network network = new Network(neuronsHiddenLayer);
 
             network.DrawWeights();
@@ -57,6 +57,7 @@ namespace Zadanie2
                         wrongSamples++;
                     }
                 }
+                Console.WriteLine("samp: " + wrongSamples);
                 distribution.Add(wrongSamples / Data.Count);
             }
 
@@ -95,12 +96,12 @@ namespace Zadanie2
             Console.ReadLine(); //żeby się konsola nie zamykała od razu
         }
 
-        public static double normalize(double x)
+        public static double Normalize(double x)
         {
             return (x - normalizeMin) / normalizeRange;
         }
 
-        public static double denormalize(double x)
+        public static double Denormalize(double x)
         {
             return (x * normalizeRange) + normalizeMin;
         }

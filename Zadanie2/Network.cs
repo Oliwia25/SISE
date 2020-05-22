@@ -46,9 +46,7 @@ namespace Zadanie2
         }
 
         public void Train(List<List<double>> dataAllInput, int epochNumber)
-        {
-            int wrongSamples = 0;
-            
+        {            
             for (int i = 0; i < epochNumber; i++) //poczatek epoki
             {
                 Console.WriteLine("Epoch number: " + i);
@@ -85,10 +83,7 @@ namespace Zadanie2
                             tempWeights.Add(_lastLayer[w].GetWeight(k));
                         }
                         _hiddenLayer[k].CalcDeltaHiddenLayer(deltaLastLayer, tempWeights, _lastLayer.Count);
-                    }
-
-                    double error = Math.Sqrt(Math.Pow(_lastLayer[0].Delta, 2) + Math.Pow(_lastLayer[1].Delta, 2));
-                    _avgError.Add(error); // błąd pomiaru
+                    }                    
                                         
                     for (int k = 0; k < _lastLayer.Count; k++)
                         _lastLayer[k].UpdateWeight(outputs); // zmiana wag w warstwie ostatniej
@@ -108,11 +103,14 @@ namespace Zadanie2
                     {
                         for (int q = 0; q < 2; q++)
                         {
-                            Console.WriteLine("Wejsciowe: "+ Program.denormalize(dataAllInput[j][q+2]));
-                            Console.WriteLine("Wyjsciowe: "+ Program.denormalize(_lastLayer[q].Output));
+                            Console.WriteLine("Wejsciowe: "+ Program.Denormalize(dataAllInput[j][q+2]));
+                            Console.WriteLine("Wyjsciowe: "+ Program.Denormalize(_lastLayer[q].Output));
                         }
                     }
                 }
+                double error = Math.Sqrt(Math.Pow(_lastLayer[0].Delta, 2) + Math.Pow(_lastLayer[1].Delta, 2));
+                Console.WriteLine("error: " + Program.Denormalize(error));
+                _avgError.Add(Program.Denormalize(error)); // błąd pomiaru
             }
 
         }
