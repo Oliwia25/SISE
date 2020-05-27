@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace Zadanie2
 {
@@ -63,6 +64,29 @@ namespace Zadanie2
 
             network.DrawWeights();
             network.Train(Data, epochNumber);
+
+            Console.WriteLine("Hidden layer neuron weights: ");
+
+            for(int i = 0; i < network.HiddenLayer.Count; i++)
+            {
+                Console.WriteLine("Neuron nr: " + i);
+                for (int j = 0; j < network.HiddenLayer[i].Weights.Count; j++)
+                {
+                    Console.WriteLine(" " + network.HiddenLayer[i].Weights[j]);
+                }
+            }
+
+            Console.WriteLine("Last layer neuron weights: ");
+
+            for (int i = 0; i < network.Lastlayer.Count; i++)
+            {
+                Console.WriteLine("Neuron nr: " + i);
+                for (int j = 0; j < network.Lastlayer[i].Weights.Count; j++)
+                {
+                    Console.WriteLine(" " + network.Lastlayer[i].Weights[j]);
+                }
+            }
+
             network.Train(Test, 1);
 
 
@@ -78,7 +102,7 @@ namespace Zadanie2
                         wrongSamples += 1.00d;
                     }
                 }
-                Console.WriteLine("samp: " + wrongSamples);
+                //Console.WriteLine("samp: " + wrongSamples);
                 distribution.Add(wrongSamples / Test.Count);
             }
 
