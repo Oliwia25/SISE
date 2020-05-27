@@ -24,7 +24,7 @@ namespace Zadanie2
             numberOfNeuronsInHiddenLayer = number;
             _hiddenLayer = new List<Neuron>();
             _lastLayer = new List<Neuron>();
-            AvgError = new List<double>();
+            _avgError = new List<double>();
         }
 
         public void DrawWeights()
@@ -46,7 +46,8 @@ namespace Zadanie2
         }
 
         public void Train(List<List<double>> dataAllInput, int epochNumber)
-        {            
+        {
+            _avgError.Clear();
             for (int i = 0; i < epochNumber; i++) //poczatek epoki
             {
                 Console.WriteLine("Epoch number: " + i);
